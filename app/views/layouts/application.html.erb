@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>d20WebTools</title>
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag 'application',               'data-turbolinks-track' => true %>
+	<%= csrf_meta_tags %>
+</head>
+<body>
+	<div class="navbar navbar-inverse navbar-fixed-top active">
+		<div class="navbar-inner">
+			<div class="container"style="width: auto;">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="/">d20 Web Tools</a>
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li>
+							<a href="/index">Home</a>
+						</li>
+						<li>
+							<a href="/about">About</a>
+						</li>
+						<li>
+							<a href="/contact">Contact</a>
+						</li>
+						<li class="dropdown">
+							<%= render 'layouts/rooms_menu' %>
+						</li>
+					</ul>
+					<%= render 'layouts/user_header' %>
+				</div>
+				<!--/.navbar-collapse -->
+			</div>
+		</div>
+	</div>
+	<%= render 'layouts/alert_notice' %>
+	<%= render 'layouts/new_room_popup' %>
+	<div class="container">
+		<%= yield %>
+		<footer class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+			<p style="padding: 10px;">&copy; D4nGuARd 2014</p>
+		</footer>
+	</div>
+	<!-- /container -->
+</body>
+</html>
