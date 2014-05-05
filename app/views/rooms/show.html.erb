@@ -1,0 +1,111 @@
+<% content_for :title do %> - Room &quot;<%= @room.name %>&quot;<% end %>
+<% content_for :head do %>
+	<%= stylesheet_link_tag "tablecloth", "prettify" %>
+	<%= javascript_include_tag "jquery.metadata", "jquery.tablesorter" %>
+<% end %>
+<div id="jumbo_header" class="jumbotron">
+	<div class="container">
+		<h1><%= @room.name %></h1>
+		<p style="font-size: x-small;">by <%= @room.master.email %></p>
+	</div>
+</div>
+<style type="text/css">
+<!--
+#jumbo_header {
+	padding: 0;
+	margin: 0;
+}
+
+#row1 {
+	width: 66.66666666666666% !important;
+}
+
+#chatbox {
+	text-align: left;
+	margin: 0 auto;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	padding: 10px;
+	background: #fff;
+	height: 230px;
+	width: auto;
+	border: 1px solid #ACD8F0;
+	overflow: auto;
+	margin-bottom: 25px;
+}
+
+.form-group,.form-group button,.form-group input {
+	float: left;
+	display: inline;
+}
+
+.form-group {
+	margin-right: 5px
+}
+-->
+</style>
+<div class="row">
+	<div id="row1" class="col-lg-4">
+		<script type="text/javascript">
+			var animateScroll = false;
+
+			function scrollLog() {
+				if (animateScroll) {
+					$("#chatbox").animate({
+						scrollTop : $('#chatbox')[0].scrollHeight
+					}, 'normal');
+				} else {
+					$('#chatbox').scrollTop($('#chatbox')[0].scrollHeight);
+				}
+			}
+
+			function ReloadPage() {
+				$('#chatbox').load('chatbox');
+				scrollLog();
+			};
+			$(document).ready(function() {
+				//ReloadPage();
+				$('input[name="message"]').focus();
+				//setInterval('ReloadPage()', 500);
+				$.ajaxSetup({
+					cache : true
+				});
+			});
+
+			$('#send').click(function() {
+				scrollLog();
+			});
+		</script>
+		<div id="chatbox" class="row"></div>
+		<form action="chat" method="post" role="form" class="form-inline">
+			<div class="input-group" style="width: 100%;">
+				<input name="message" type="text" class="form-control" />
+				<span class="input-group-btn">
+					<button id="send" type="submit" class="btn btn-primary">Send</button>
+				</span>
+			</div>
+		</form>
+	</div>
+	<div id="row2" class="col-lg-4">
+		&nbsp;
+	</div>
+	<div id="row3" class="col-lg-4">
+		<script type="text/javascript">
+			$("#members").tablecloth({ theme : "dark" });
+		</script>
+		<h4>Logged members (<%= @room.members.count %>)</h4>
+		<div class="table-responsive">
+			<table id="members" class="table table-striped table-condensed table-hover">
+			<% @room.members.each do |m| %>
+				<tr>
+				<% if current_user.username = m.user.username %>
+					<td class="success"><%= m.user.username %></td>
+				<% else %>
+					<td><%= m.user.username %></td>
+				<% end %>
+				</tr>
+			<% end %>
+			</table>
+		</div>
+	</div>
+</div>

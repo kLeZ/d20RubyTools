@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: 1
   text: MyText
-  time: 2014-05-05 16:38:16
+  room_id: 
+  user: 
 
 two:
-  id: 1
   text: MyText
-  time: 2014-05-05 16:38:16
+  room_id: 
+  user: 

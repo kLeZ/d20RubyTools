@@ -11,27 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140505144709) do
+ActiveRecord::Schema.define(version: 20140505201203) do
 
   create_table "members", force: true do |t|
+    t.integer  "room_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "members", ["room_id"], name: "index_members_on_room_id", using: :btree
+  add_index "members", ["user_id"], name: "index_members_on_user_id", using: :btree
 
   create_table "messages", force: true do |t|
     t.text     "text"
-    t.datetime "time"
+    t.integer  "room_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "messages", ["room_id"], name: "index_messages_on_room_id", using: :btree
+  add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
 
   create_table "rooms", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   add_index "rooms", ["name"], name: "index_rooms_on_name", unique: true, using: :btree
+  add_index "rooms", ["user_id"], name: "index_rooms_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.datetime "created_at"
@@ -47,10 +58,12 @@ ActiveRecord::Schema.define(version: 20140505144709) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "username"
+    t.integer  "room_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["room_id"], name: "index_users_on_room_id", using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
 end

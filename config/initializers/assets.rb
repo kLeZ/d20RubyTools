@@ -1,0 +1,5 @@
+Rails.application.config.assets.precompile += %w( tablecloth.css )
+Rails.application.config.assets.precompile += %w( prettify.css )
+Rails.application.config.assets.precompile += %w( jquery.metadata.js )
+Rails.application.config.assets.precompile += %w( jquery.tablesorter.js )
+Rails.application.config.assets.precompile += %w( jquery.tablecloth.js )
