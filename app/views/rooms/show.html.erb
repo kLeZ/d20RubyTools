@@ -3,17 +3,11 @@
 	<%= stylesheet_link_tag "tablecloth", "prettify" %>
 	<%= javascript_include_tag "jquery.metadata", "jquery.tablesorter" %>
 <% end %>
-<div id="jumbo_header" class="jumbotron">
-	<div class="container">
-		<h1><%= @room.name %></h1>
-		<p style="font-size: x-small;">by <%= @room.master.email %></p>
-	</div>
-</div>
 <style type="text/css">
 <!--
 #jumbo_header {
-	padding: 0;
-	margin: 0;
+	padding: 0px;
+	margin: 0px;
 }
 
 #row1 {
@@ -44,43 +38,68 @@
 }
 -->
 </style>
+<script type="text/javascript">
+	var animateScroll = false;
+
+	function scrollLog() {
+		if (animateScroll) {
+			$("#chatbox").animate({
+				scrollTop : $('#chatbox')[0].scrollHeight
+			}, 'normal');
+		} else {
+			$('#chatbox').scrollTop($('#chatbox')[0].scrollHeight);
+		}
+	}
+
+	function ReloadPage() {
+		$('#chatbox').load('chatbox');
+		scrollLog();
+	};
+	$(document).ready(function() {
+		//ReloadPage();
+		$('input[name="message"]').focus();
+		//setInterval('ReloadPage()', 500);
+		$.ajaxSetup({
+			cache : true
+		});
+	});
+
+	$('#send').click(function() {
+		scrollLog();
+	});
+
+	$("#members").tablecloth({ theme : "dark" });
+
+	$('#tabs a[href="#members-pane"]').tab('show');
+	$('#tabs a[href="#profile-pane"]').click(function (e) {
+			e.preventDefault()
+			$(this).tab('show')
+		});
+
+</script>
+<!--
+Il profilo del personaggio (scheda) dovrà essere una dropdown DOPO il bottone di Sign Out
+Tutte le funzioni andranno divise per categoria dentro dei TAB, nello spazio di "Logged members"
+Mappa interattiva (o immagine statica) come sfondo del box "jumbo_header", espandibile
+-->
+<div id="jumbo_header" class="jumbotron">
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="offset1 span8 pull-right">
+				<%= link_to "Exit room", exit_room_path, :method => :put %>
+			</div>
+			<h1><%= @room.name %></h1>
+			<p style="font-size: x-small;">by <%= @room.master.username %></p>
+		</div>
+	</div>
+</div>
 <div class="row">
 	<div id="row1" class="col-lg-4">
-		<script type="text/javascript">
-			var animateScroll = false;
-
-			function scrollLog() {
-				if (animateScroll) {
-					$("#chatbox").animate({
-						scrollTop : $('#chatbox')[0].scrollHeight
-					}, 'normal');
-				} else {
-					$('#chatbox').scrollTop($('#chatbox')[0].scrollHeight);
-				}
-			}
-
-			function ReloadPage() {
-				$('#chatbox').load('chatbox');
-				scrollLog();
-			};
-			$(document).ready(function() {
-				//ReloadPage();
-				$('input[name="message"]').focus();
-				//setInterval('ReloadPage()', 500);
-				$.ajaxSetup({
-					cache : true
-				});
-			});
-
-			$('#send').click(function() {
-				scrollLog();
-			});
-		</script>
 		<div id="chatbox" class="row"></div>
 		<form action="chat" method="post" role="form" class="form-inline">
 			<div class="input-group" style="width: 100%;">
 				<input name="message" type="text" class="form-control" />
-				<span class="input-group-btn">
+				<span class="input-group-btn" style="width: 1%;">
 					<button id="send" type="submit" class="btn btn-primary">Send</button>
 				</span>
 			</div>
@@ -90,22 +109,15 @@
 		&nbsp;
 	</div>
 	<div id="row3" class="col-lg-4">
-		<script type="text/javascript">
-			$("#members").tablecloth({ theme : "dark" });
-		</script>
-		<h4>Logged members (<%= @room.members.count %>)</h4>
-		<div class="table-responsive">
-			<table id="members" class="table table-striped table-condensed table-hover">
-			<% @room.members.each do |m| %>
-				<tr>
-				<% if current_user.username = m.user.username %>
-					<td class="success"><%= m.user.username %></td>
-				<% else %>
-					<td><%= m.user.username %></td>
-				<% end %>
-				</tr>
-			<% end %>
-			</table>
+		<ul class="nav nav-tabs" id="tabs">
+			<li class="active"><a href="#members-pane" data-toggle="tab">Logged members (<%= @room.members.count %>)</a></li>
+			<li><a href="#profile-pane" data-toggle="tab">Profile</a></li>
+		</ul>
+		<div class="tab-content" style="border: 1px solid #eee; height: 251px;">
+			<div class="tab-pane fade in active" id="members-pane">
+				<%= render 'rooms/members_list' %>
+			</div>
+			<div class="tab-pane fade" id="profile-pane">This is the profile pane</div>
 		</div>
 	</div>
 </div>

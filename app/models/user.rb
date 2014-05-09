@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 	# Virtual attribute for authenticating by either username or email
 	# This is in addition to a real persisted field like 'username'
 	attr_accessor :login
+
 	def self.find_first_by_auth_conditions(warden_conditions)
 		conditions = warden_conditions.dup
 		if login = conditions.delete(:login)

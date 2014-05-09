@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="description" content="">
+            <meta name="author" content="">
+
+            <title>oRouter</title>
+
+            <!-- CSS -->
+            <link href="css/bootstrap.min.css" rel="stylesheet">
+            <link href="css/default.css" rel="stylesheet">
+            <link href="css/media-queries.css" rel="stylesheet">
+            <link href="css/font-awesome.min.css" rel="stylesheet">
+
+            <!-- Google fonts -->
+            <link href="http://fonts.googleapis.com/css?family=Roboto:400,300,100,100italic,300italic,400italic,700,700italic" rel="stylesheet">
+            <link href='http://fonts.googleapis.com/css?family=Unlock' rel='stylesheet' type='text/css'>
+
+            <script src="js/modernizr-2.6.2.min.js"></script>
+            <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+            <!--[if lt IE 9]>
+            <script src="js/html5shiv.js"></script>
+            <script src="js/respond.min.js"></script>
+            <![endif]-->
+        </head>
+        <body>
+            <!-- Intro -->
+            <section id="intro">
+                <div class="intro-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-14">
+                                <!-- <h1><a href="#"><i class="fa fa-flash"></i></a></h1><br> -->
+                                <h2>oRouter</h2>
+                                <h3>We are going to introduce you a new way for protecting<br/>
+                                the security, privacy and anonymity of your communications</h3>
+                                <div class="timer">
+                                    <div class="time-wrapper">
+                                        <span class="days"></span> <br>Days
+                                    </div>
+                                    <div class="time-wrapper">
+                                        <span class="hours"></span> <br>Hours
+                                    </div>
+                                    <div class="time-wrapper">
+                                        <span class="minutes"></span> <br>Minutes
+                                    </div>
+                                    <div class="time-wrapper">
+                                        <span class="seconds"></span> <br>Seconds
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row subscribe-section-alt">
+                            <div class="col-md-8 col-md-offset-2">
+                                <h3 class="success-message">Subscribe here</h3>
+                                <p class="error-message">Sign up to be notified when our site is ready.</p>
+                                <div class="subscribe">
+                                    <form method="post" action="subscribe.php">
+                                        <div class="form-group">
+                                            <label class="sr-only">Email</label>
+                                            <input type="text" name="email" class="form-control form-control-alt" placeholder="Enter your email here">
+                                        </div>
+                                        <button type="submit" class="btn btn-3 btn-lg">Subscribe</button>
+                                    </form>
+<!--
+                                    <div class="success-message"></div>
+                                    <div class="error-message"></div>
+-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End intro -->
+
+            <!-- JavaScripts -->
+            <script src="js/jquery-1.10.2.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/jquery.backstretch.min.js"></script>
+            <script src="js/jquery.countdown.min.js"></script>
+            <script src="js/scripts.js"></script>
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-50073610-1', 'orouter.com');
+			ga('send', 'pageview');
+		</script>
+		</body>
+    </html>

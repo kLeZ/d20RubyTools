@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 	devise_for :users
 
-	resources :rooms
+	resources :rooms do
+		member do
+			put :exit
+		end
+	end
 
 	get 'contact' => 'contact#index'
 

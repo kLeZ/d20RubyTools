@@ -6,8 +6,13 @@
 	<meta name="description" content="" />
 	<meta name="author" content="" />
 	<title>d20WebTools<%= yield :title %></title>
+	<%= favicon_link_tag '/images/favicon.png' %>
 	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 	<%= javascript_include_tag 'application',               'data-turbolinks-track' => true %>
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+	<%= javascript_include_tag 'html5shiv', 'respond.min' %>
+<![endif]-->
 	<%= csrf_meta_tags %>
 	<%= yield :head %>
 </head>
@@ -20,16 +25,16 @@
 				</div>
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li>
+						<li class="<%= 'active' if params[:controller] == 'welcome' %>">
 							<a href="/index">Home</a>
 						</li>
-						<li>
+						<li class="<%= 'active' if params[:controller] == 'about' %>">
 							<a href="/about">About</a>
 						</li>
-						<li>
+						<li class="<%= 'active' if params[:controller] == 'contact' %>">
 							<a href="/contact">Contact</a>
 						</li>
-						<li class="dropdown">
+						<li class="dropdown <%= 'active' if params[:controller] == 'rooms' %>">
 							<%= render 'layouts/rooms_menu' %>
 						</li>
 					</ul>
@@ -45,6 +50,7 @@
 		<%= yield %>
 		<footer class="navbar navbar-default navbar-fixed-bottom" role="navigation">
 			<p style="padding: 10px;">&copy; D4nGuARd 2014</p>
+			<p>I'm in <%= params[:controller] %></p>
 		</footer>
 	</div>
 	<!-- /container -->
