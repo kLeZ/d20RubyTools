@@ -52,13 +52,13 @@
 	}
 
 	function ReloadPage() {
-		$('#chatbox').load('chatbox');
+		$('#chatbox').load("<%= room_messages_path(@room) %>");
 		scrollLog();
 	};
 	$(document).ready(function() {
-		//ReloadPage();
+		ReloadPage();
 		$('input[name="message"]').focus();
-		//setInterval('ReloadPage()', 500);
+		setInterval('ReloadPage()', 500);
 		$.ajaxSetup({
 			cache : true
 		});
@@ -86,7 +86,10 @@ Mappa interattiva (o immagine statica) come sfondo del box "jumbo_header", espan
 	<div class="container-fluid">
 		<div class="row-fluid">
 			<div class="offset1 span8 pull-right">
-				<%= link_to "Exit room", exit_room_path, :method => :put %>
+				<ul class="nav">
+					<li><%= link_to "Exit room", exit_room_path, :method => :put %></li>
+					<li><%= link_to "Clear chat (this action cannot be reverted)", clear_room_messages_path(@room), :method => :put %></li>
+				</ul>
 			</div>
 			<h1><%= @room.name %></h1>
 			<p style="font-size: x-small;">by <%= @room.master.username %></p>
@@ -96,14 +99,14 @@ Mappa interattiva (o immagine statica) come sfondo del box "jumbo_header", espan
 <div class="row">
 	<div id="row1" class="col-lg-4">
 		<div id="chatbox" class="row"></div>
-		<form action="chat" method="post" role="form" class="form-inline">
+		<%= form_for [@room, @room.messages.build], :id => 'send-message', :role => 'form', :class => 'form-inline' do |f| %>
 			<div class="input-group" style="width: 100%;">
-				<input name="message" type="text" class="form-control" />
+				<%= f.text_field :body, :class=> 'form-control' %>
 				<span class="input-group-btn" style="width: 1%;">
-					<button id="send" type="submit" class="btn btn-primary">Send</button>
+					<%= f.submit "Send", :class => 'btn btn-primary', :style => 'height: 34px;' %>
 				</span>
 			</div>
-		</form>
+		<% end %>
 	</div>
 	<div id="row2" class="col-lg-4">
 		&nbsp;

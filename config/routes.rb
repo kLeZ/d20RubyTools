@@ -5,6 +5,12 @@ Rails.application.routes.draw do
 		member do
 			put :exit
 		end
+
+		resources :messages, controller: 'chat_box' do
+			collection do
+				put :clear
+			end
+		end
 	end
 
 	get 'contact' => 'contact#index'

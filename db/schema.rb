@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140505201203) do
+ActiveRecord::Schema.define(version: 20140511204449) do
 
   create_table "members", force: true do |t|
     t.integer  "room_id"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20140505201203) do
   add_index "members", ["user_id"], name: "index_members_on_user_id", using: :btree
 
   create_table "messages", force: true do |t|
-    t.text     "text"
+    t.string   "body"
     t.integer  "room_id"
     t.integer  "user_id"
     t.datetime "created_at"

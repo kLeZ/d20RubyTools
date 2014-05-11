@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  text: MyText
+  body: MyString
   room_id: 
-  user: 
+  user_id: 
 
 two:
-  text: MyText
+  body: MyString
   room_id: 
-  user: 
+  user_id: 
