@@ -7,13 +7,14 @@
 	<meta name="author" content="" />
 	<title>d20WebTools<%= yield :title %></title>
 	<%= favicon_link_tag '/images/favicon.png' %>
-	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
 <% if not Rails.application.assets.find_asset(params[:controller]).nil? %>
 	<%= javascript_include_tag params[:controller] %>
 	<%= stylesheet_link_tag params[:controller] %>
 <% end %>
+
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -62,7 +63,6 @@
 		<%= yield %>
 		<footer class="navbar navbar-default navbar-fixed-bottom" role="navigation">
 			<p style="padding: 10px;">&copy; D4nGuARd 2014</p>
-			<p>I'm in <%= params[:controller] %></p>
 		</footer>
 	</div>
 	<!-- /container -->
