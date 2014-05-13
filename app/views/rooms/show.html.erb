@@ -3,6 +3,9 @@
 	<%= stylesheet_link_tag "tablecloth", "prettify" %>
 	<%= javascript_include_tag "jquery.metadata", "jquery.tablesorter", "jquery.tablecloth" %>
 <% end %>
+<script type="text/javascript">
+	initRoom("<%= room_messages_path(@room) %>");
+</script>
 <%
 #Il profilo del personaggio (scheda) dovrà essere una dropdown DOPO il bottone di Sign Out
 #Tutte le funzioni andranno divise per categoria dentro dei TAB, nello spazio di "Logged members"
@@ -24,12 +27,13 @@
 </div>
 <div class="row">
 	<div id="row1" class="col-lg-4">
-		<div id="chatbox" class="row" data-uri="<%= request.host %>:<%= request.port %>/websocket"></div>
+<!-- <div id="chatbox" class="row" data-uri="<%= request.host %>:<%= request.port %>/websocket"></div> -->
+		<div id="chatbox" class="row"></div>
 		<%= form_for [@room, @room.messages.build], :id => 'send-message', :role => 'form', :class => 'form-inline' do |f| %>
 			<div class="input-group" style="width: 100%;">
 				<%= f.text_field :body, :class=> 'form-control' %>
 				<span class="input-group-btn" style="width: 1%;">
-					<%= f.submit "Send", :class => 'btn btn-primary', :style => 'height: 34px;' %>
+					<%= f.submit "Send", :id => 'message_send', :class => 'btn btn-primary', :style => 'height: 34px;' %>
 				</span>
 			</div>
 		<% end %>

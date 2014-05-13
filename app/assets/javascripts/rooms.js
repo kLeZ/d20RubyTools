@@ -13,32 +13,34 @@ function scrollLog() {
 	}
 }
 
-function ReloadPage(page) {
+function reloadPage(page) {
 	$('#chatbox').load(page);
 	scrollLog();
 };
 
-$(document).ready(function() {
-	ReloadPage("<%= room_messages_path(@room) %>");
-	$('input[name="message"]').focus();
-	setInterval("ReloadPage(\"<%= room_messages_path(@room) %>\")", 500);
-	$.ajaxSetup({
-		cache : true
+function initRoom(room_path) {
+	$(document).ready(function() {
+		reloadPage(room_path);
+		$('#message_body').focus();
+		setInterval("reloadPage(" + room_path + ")", 500);
+		$.ajaxSetup({
+			cache : true
+		});
 	});
-});
 
-$('#send').click(function() {
-	scrollLog();
-});
+	$('#message_send').click(function() {
+		scrollLog();
+	});
 
-$("#members").tablecloth({ theme : "dark" });
+	$("#members").tablecloth({ theme : "dark" });
 
-$('#tabs a[href="#members-pane"]').tab('show');
-$('#tabs a[href="#profile-pane"]').click(function (e) {
-	e.preventDefault()
-	$(this).tab('show')
-});
+	$('#tabs a[href="#members-pane"]').tab('show');
+	$('#tabs a[href="#profile-pane"]').click(function (e) {
+		e.preventDefault()
+		$(this).tab('show')
+	});
 
-$(window).bind('beforeunload', function(){
-	return 'Please exit from the room with the exit link.';
-});
+	$(window).bind('beforeunload', function(){
+		return 'Please exit from the room with the exit link.';
+	});
+}

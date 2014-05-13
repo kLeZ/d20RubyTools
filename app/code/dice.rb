@@ -33,6 +33,10 @@ class Dice
 		return s
 	end
 
+	def Dice.isManyDice(s)
+		return s.scan(PATTERN).any?
+	end
+
 	def Dice.parse(s)
 		m = PATTERN.match(s)
 		return Dice.new(m[:throws], m[:faces], m[:operator], m[:modifier], m[:entire])
@@ -76,7 +80,9 @@ class Dice
 	end
 end
 
-Dice.parseManyShowDebug('(1d20+13)+(3d4)*(4d6-1)+(25d12+35)-(25d12/76)')
-Dice.parseManyShowDebug('This is a string in which I can play D&D. Now roll 1d6 for example, and then a will save by 1d20+5')
-Dice.parseManyShowResults('(1d20+13)+(3d4)*(4d6-1)+(25d12+35)-(25d12/76)')
-Dice.parseManyShowResults('This is a string in which I can play D&D. Now roll 1d6 for example, and then a will save by 1d20+5')
+# Dice.parseManyShowDebug('(1d20+13)+(3d4)*(4d6-1)+(25d12+35)-(25d12/76)')
+# Dice.parseManyShowDebug('This is a string in which I can play D&D. Now roll 1d6 for example, and then a will save by 1d20+5')
+# Dice.parseManyShowResults('(1d20+13)+(3d4)*(4d6-1)+(25d12+35)-(25d12/76)')
+# Dice.parseManyShowResults('This is a string in which I can play D&D. Now roll 1d6 for example, and then a will save by 1d20+5')
+# puts Dice.isManyDice('This is a string in which I can play D&D. Now roll 1d6 for example, and then a will save by 1d20+5')
+# puts Dice.isManyDice('This is a string in which I cannot play D&D.')
