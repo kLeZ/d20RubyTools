@@ -1,5 +1,0 @@
-<% @room.messages.each do |message| %>
-<div>
-[<%= message.created_at.strftime("%d/%m/%Y %H:%M:%S") %>] <strong><%= message.user.username %></strong>: <%= message.body %>
-</div>
-<% end %>

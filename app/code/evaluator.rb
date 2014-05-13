@@ -1,8 +1,13 @@
+#require './chainable'
+
 class Evaluator
 	include Chainable
 
 	def initialize
-		self.next_in_chain = DiceEvaluator.new
+	end
+
+	def canManage(s)
+		return true
 	end
 
 	def manage(message)
@@ -10,4 +15,15 @@ class Evaluator
 	end
 
 	chain_method :manage
+
+	def evaluate(s)
+		if canManage(s)
+			return manage(s)
+		else
+			abort_chain
+		end
+	end
+end
+
+class TextEvaluator < Evaluator
 end

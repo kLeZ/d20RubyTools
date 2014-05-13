@@ -13,16 +13,17 @@ function scrollLog() {
 	}
 }
 
-function reloadPage(page) {
-	$('#chatbox').load(page);
+function reloadChat(chat_url) {
+	$('#chatbox').load(chat_url);
 	scrollLog();
 };
 
 function initRoom(room_path) {
+
 	$(document).ready(function() {
-		reloadPage(room_path);
+		reloadChat(room_path);
 		$('#message_body').focus();
-		setInterval("reloadPage(" + room_path + ")", 500);
+		setInterval("reloadChat('" + room_path + "')", 1000);
 		$.ajaxSetup({
 			cache : true
 		});
@@ -40,7 +41,7 @@ function initRoom(room_path) {
 		$(this).tab('show')
 	});
 
-	$(window).bind('beforeunload', function(){
-		return 'Please exit from the room with the exit link.';
-	});
+//	$(window).bind('beforeunload', function() {
+//		return 'Please exit from the room with the exit link.';
+//	});
 }

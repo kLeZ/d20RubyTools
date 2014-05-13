@@ -4,7 +4,7 @@ class ChatBoxController < ApplicationController
 	def create
 		@room = Room.find(params[:room_id])
 
-		evaluator = Evaluator.new
+		evaluator = MainEvaluator.new
 		body = evaluator.manage(params[:message][:body])
 		message = Message.new(:body => body, :user => current_user, :room => @room)
 		@room.messages << message
