@@ -16,8 +16,8 @@ class ChatBoxController < ApplicationController
 		@room = Room.find(params[:room_id])
 		respond_to do |format|
 			format.html { render :layout => false } # index.html.erb
-			format.xml  { render xml: @room.messages}
-			format.json { render json: @room.messages}
+			format.xml  { render xml: @room.messages }
+			format.json { render json: @room.messages }
 		end
 	end
 
