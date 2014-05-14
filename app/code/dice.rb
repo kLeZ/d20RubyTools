@@ -1,7 +1,7 @@
 ﻿class Dice
 	attr_reader :throws, :faces, :operator, :modifier, :replace, :results, :sum
 
-	PATTERN = /(?<entire>\(?(?<throws>\d+)[Dd](?<faces>\d{1,3})(?<operator>\+|-|\*|\/)?(?<modifier>\d+)?\)?)(?<diceoperator>\+|-|\*|\/)?/
+	PATTERN = /(?<entire>\(?(?<throws>\d+)[Dd](?<faces>\d{1,3})(\s*(?<operator>\+|-|\*|\/)?\s*(?<modifier>\d+)?)?\)?)(\s*(?<diceoperator>\+|-|\*|\/)?)?/
 	DICE_TOKEN = "D"
 	RANDOM = Random.new
 
@@ -50,7 +50,10 @@
 		end
 	end
 
-	def Dice.parseManyShowResults(s)
+	def Dice.parseManyShowResults(s, debug = false)
+		if debug
+			puts "Original string: #{s}"
+		end
 		exps = Dice.parseMany(s)
 		replaced = s
 		exp = []
@@ -59,35 +62,26 @@
 			replaced = replaced.sub(d.replace, d.to_s)
 			exp << d.sum
 			exp << dop unless dop.nil?
+			if debug
+				puts "You made a throw of: #{d}"
+				puts "Number dies: #{d.throws}"
+				puts "Number faces: #{d.faces}"
+				puts "Operator: #{d.operator}"
+				puts "Modifier: #{d.modifier}"
+				puts "Entire string: #{d.replace}"
+				puts "Your dice roll: #{d.to_s}"
+				puts "\n\n"
+			end
 		end
 		sums = eval(exp.join)
+		puts "Replaced string now is: #{replaced} :: #{sums}"
 		return "#{replaced} :: #{sums}"
-	end
-
-	def Dice.parseManyShowDebug(s)
-		puts "Original string: #{s}"
-		exps = Dice.parseMany(s)
-		replaced = s
-		exps.each do |d, dop|
-			d.roll
-			puts "You made a throw of: #{d}"
-			puts "Number dies: #{d.throws}"
-			puts "Number faces: #{d.faces}"
-			puts "Operator: #{d.operator}"
-			puts "Modifier: #{d.modifier}"
-			puts "Entire string: #{d.replace}"
-			puts "Your dice roll: #{d.to_s}"
-			puts "\n\n"
-			replaced = replaced.sub(d.replace, d.to_s)
-		end
-		puts "Replaced string now is: #{replaced}"
 	end
 end
 
 #puts Dice.parseMany('(1d20+13)+(3d4)*(4d6-1)+(25d12+35)-(25d12/76)')
-#Dice.parseManyShowDebug('(1d20+13)+(3d4)*(4d6-1)+(25d12+35)-(25d12/76)')
-#Dice.parseManyShowDebug('This is a string in which I can play D&D. Now roll 1d6 for example, and then a will save by 1d20+5')
-#puts Dice.parseManyShowResults('(1d20+13)+(3d4)*(4d6-1)+(25d12+35)-(25d12/76)')
-#puts Dice.parseManyShowResults('This is a string in which I can play D&D. Now roll 1d6 for example, and then a will save by 1d20+5')
 #puts Dice.isManyDice('This is a string in which I can play D&D. Now roll 1d6 for example, and then a will save by 1d20+5')
 #puts Dice.isManyDice('This is a string in which I cannot play D&D.')
+#puts Dice.parseManyShowResults('(1d20+13)+(3d4)*(4d6-1)+(25d12+35)-(25d12/76)', true)
+#puts Dice.parseManyShowResults('(1d20 + 13) + (3d4) * (4d6 - 1) + (25d12 + 35) - (25d12 / 76)', true)
+#puts Dice.parseManyShowResults('This is a string in which I can play D&D. Now roll (1d6)+ for example, and then a will save by 1d20+5', true)
