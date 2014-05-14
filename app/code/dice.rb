@@ -1,9 +1,14 @@
-﻿class Dice
+require 'logger'
+
+class Dice
 	attr_reader :throws, :faces, :operator, :modifier, :replace, :results, :sum
 
 	PATTERN = /(?<entire>\(?(?<throws>\d+)[Dd](?<faces>\d{1,3})(\s*(?<operator>\+|-|\*|\/)?\s*(?<modifier>\d+)?)?\)?)(\s*(?<diceoperator>\+|-|\*|\/)?)?/
 	DICE_TOKEN = "D"
 	RANDOM = Random.new
+
+	@@log = Logger.new(STDOUT)
+	@@log.level = Logger::DEBUG
 
 	def initialize(throws, faces, operator = nil, modifier = nil, replace = nil)
 		@throws = Integer(throws)
@@ -50,10 +55,9 @@
 		end
 	end
 
-	def Dice.parseManyShowResults(s, debug = false)
-		if debug
-			puts "Original string: #{s}"
-		end
+	def Dice.parseManyShowResults(s)
+		@@log.debug("Original string: #{s}")
+
 		exps = Dice.parseMany(s)
 		replaced = s
 		exp = []
@@ -62,26 +66,25 @@
 			replaced = replaced.sub(d.replace, d.to_s)
 			exp << d.sum
 			exp << dop unless dop.nil?
-			if debug
-				puts "You made a throw of: #{d}"
-				puts "Number dies: #{d.throws}"
-				puts "Number faces: #{d.faces}"
-				puts "Operator: #{d.operator}"
-				puts "Modifier: #{d.modifier}"
-				puts "Entire string: #{d.replace}"
-				puts "Your dice roll: #{d.to_s}"
-				puts "\n\n"
-			end
+
+			@@log.debug("You made a throw of: #{d}")
+			@@log.debug("Number dies: #{d.throws}")
+			@@log.debug("Number faces: #{d.faces}")
+			@@log.debug("Operator: #{d.operator}")
+			@@log.debug("Modifier: #{d.modifier}")
+			@@log.debug("Entire string: #{d.replace}")
+			@@log.debug("Your dice roll: #{d.to_s}")
 		end
 		sums = eval(exp.join)
-		puts "Replaced string now is: #{replaced} :: #{sums}"
+		@@log.debug("Replaced string now is: #{replaced} :: #{sums}")
 		return "#{replaced} :: #{sums}"
+	end
+
+	def Dice.logger
+		return @@log
 	end
 end
 
-#puts Dice.parseMany('(1d20+13)+(3d4)*(4d6-1)+(25d12+35)-(25d12/76)')
-#puts Dice.isManyDice('This is a string in which I can play D&D. Now roll 1d6 for example, and then a will save by 1d20+5')
-#puts Dice.isManyDice('This is a string in which I cannot play D&D.')
-#puts Dice.parseManyShowResults('(1d20+13)+(3d4)*(4d6-1)+(25d12+35)-(25d12/76)', true)
-#puts Dice.parseManyShowResults('(1d20 + 13) + (3d4) * (4d6 - 1) + (25d12 + 35) - (25d12 / 76)', true)
-#puts Dice.parseManyShowResults('This is a string in which I can play D&D. Now roll (1d6)+ for example, and then a will save by 1d20+5', true)
+#Dice.logger.level = Logger::INFO
+#puts Dice.parseManyShowResults('(1d20 + 13) + (3d4) * (4d6 - 1) + (25d12 + 35) - (25d12 / 76)')
+#puts Dice.parseManyShowResults('This is a string in which I can play D&D. Now roll (1d6) + for example, and then a will save by 1d20+5')
