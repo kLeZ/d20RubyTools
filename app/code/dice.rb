@@ -53,14 +53,14 @@
 	def Dice.parseManyShowResults(s)
 		exps = Dice.parseMany(s)
 		replaced = s
-		arr = []
+		exp = []
 		exps.each do |d, dop|
 			d.roll
 			replaced = replaced.sub(d.replace, d.to_s)
-			arr << d.sum
-			arr << dop unless dop.nil?
+			exp << d.sum
+			exp << dop unless dop.nil?
 		end
-		sums = eval(arr.join)
+		sums = eval(exp.join)
 		return "#{replaced} :: #{sums}"
 	end
 
@@ -87,7 +87,7 @@ end
 #puts Dice.parseMany('(1d20+13)+(3d4)*(4d6-1)+(25d12+35)-(25d12/76)')
 #Dice.parseManyShowDebug('(1d20+13)+(3d4)*(4d6-1)+(25d12+35)-(25d12/76)')
 #Dice.parseManyShowDebug('This is a string in which I can play D&D. Now roll 1d6 for example, and then a will save by 1d20+5')
-puts Dice.parseManyShowResults('(1d20+13)+(3d4)*(4d6-1)+(25d12+35)-(25d12/76)')
+#puts Dice.parseManyShowResults('(1d20+13)+(3d4)*(4d6-1)+(25d12+35)-(25d12/76)')
 #puts Dice.parseManyShowResults('This is a string in which I can play D&D. Now roll 1d6 for example, and then a will save by 1d20+5')
 #puts Dice.isManyDice('This is a string in which I can play D&D. Now roll 1d6 for example, and then a will save by 1d20+5')
 #puts Dice.isManyDice('This is a string in which I cannot play D&D.')
