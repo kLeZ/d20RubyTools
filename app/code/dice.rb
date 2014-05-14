@@ -19,7 +19,7 @@
 	def roll
 		@throws.times do
 			@results << RANDOM.rand(1..@faces)
-			@resultSum+=@results.last
+			@resultSum += @results.last
 		end
 		@sum = @resultSum
 		@sum = @sum.send(@operator, @modifier) unless modifier.nil? or operator.nil?
@@ -53,27 +53,14 @@
 	def Dice.parseManyShowResults(s)
 		exps = Dice.parseMany(s)
 		replaced = s
-		sums = 0
-		prevop = ""
-		exps.each.tap do |head,*body,tail|
-			head do |d, dop|
-				d.roll
-				sums = d.sum
-				prevop = dop
-				replaced = replaced.sub(d.replace, d.to_s)
-			end
-			body.each do |d,dop|
-				d.roll
-				sums = sums.send(prevop, d.sum)
-				prevop = dop
-				replaced = replaced.sub(d.replace, d.to_s)
-			end
-			tail do |d, dop|
-				d.roll
-				sums = sums.send(prevop, d.sum)
-				replaced = replaced.sub(d.replace, d.to_s)
-			end
+		arr = []
+		exps.each do |d, dop|
+			d.roll
+			replaced = replaced.sub(d.replace, d.to_s)
+			arr << d.sum
+			arr << dop unless dop.nil?
 		end
+		sums = eval(arr.join)
 		return "#{replaced} :: #{sums}"
 	end
 
@@ -97,10 +84,10 @@
 	end
 end
 
-puts Dice.parseMany('(1d20+13)+(3d4)*(4d6-1)+(25d12+35)-(25d12/76)')
-Dice.parseManyShowDebug('(1d20+13)+(3d4)*(4d6-1)+(25d12+35)-(25d12/76)')
-Dice.parseManyShowDebug('This is a string in which I can play D&D. Now roll 1d6 for example, and then a will save by 1d20+5')
+#puts Dice.parseMany('(1d20+13)+(3d4)*(4d6-1)+(25d12+35)-(25d12/76)')
+#Dice.parseManyShowDebug('(1d20+13)+(3d4)*(4d6-1)+(25d12+35)-(25d12/76)')
+#Dice.parseManyShowDebug('This is a string in which I can play D&D. Now roll 1d6 for example, and then a will save by 1d20+5')
 puts Dice.parseManyShowResults('(1d20+13)+(3d4)*(4d6-1)+(25d12+35)-(25d12/76)')
-puts Dice.parseManyShowResults('This is a string in which I can play D&D. Now roll 1d6 for example, and then a will save by 1d20+5')
-puts Dice.isManyDice('This is a string in which I can play D&D. Now roll 1d6 for example, and then a will save by 1d20+5')
-puts Dice.isManyDice('This is a string in which I cannot play D&D.')
+#puts Dice.parseManyShowResults('This is a string in which I can play D&D. Now roll 1d6 for example, and then a will save by 1d20+5')
+#puts Dice.isManyDice('This is a string in which I can play D&D. Now roll 1d6 for example, and then a will save by 1d20+5')
+#puts Dice.isManyDice('This is a string in which I cannot play D&D.')
