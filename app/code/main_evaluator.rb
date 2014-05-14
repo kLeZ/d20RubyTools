@@ -1,19 +1,29 @@
-#require './evaluator'
-#require './dice_evaluator'
+require_relative 'evaluator'
+require_relative 'dice_evaluator'
 
 class MainEvaluator < Evaluator
 	def initialize
 		self.next_in_chain = DiceEvaluator.new
 	end
+
+	def canManage(message)
+		return false
+	end
+
+	def manage(message)
+		return message
+	end
 end
 
-#messages = [
-#	'This is NOT a D&D message.',
-#	'This is a D&D message, in which I roll 1d20+3'
-#]
+Evaluator.logger.level = Logger::DEBUG
 
-#messages.each do |message|
-#	evaluator = MainEvaluator.new
-#	body = evaluator.evaluate(message)
-#	puts body
-#end
+messages = [
+	'This is NOT a D&D message.',
+	'This is a D&D message, in which I roll 1d20+3'
+]
+
+evaluator = MainEvaluator.new
+messages.each do |message|
+	body = evaluator.evaluate(message)
+	puts body
+end

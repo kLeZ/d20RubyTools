@@ -8,7 +8,7 @@ class Dice
 	RANDOM = Random.new
 
 	@@log = Logger.new(STDOUT)
-	@@log.level = Logger::DEBUG
+	@@log.level = Logger::WARN
 
 	def initialize(throws, faces, operator = nil, modifier = nil, replace = nil)
 		@throws = Integer(throws)
@@ -85,6 +85,6 @@ class Dice
 	end
 end
 
-#Dice.logger.level = Logger::INFO
+#Dice.logger.level = Logger::DEBUG
 #puts Dice.parseManyShowResults('(1d20 + 13) + (3d4) * (4d6 - 1) + (25d12 + 35) - (25d12 / 76)')
 #puts Dice.parseManyShowResults('This is a string in which I can play D&D. Now roll (1d6) + for example, and then a will save by 1d20+5')

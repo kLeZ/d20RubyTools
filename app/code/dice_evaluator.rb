@@ -1,5 +1,6 @@
-#require './evaluator'
-#require './dice'
+require_relative 'evaluator'
+require_relative 'text_evaluator'
+require_relative 'dice'
 
 class DiceEvaluator < Evaluator
 	def initialize
