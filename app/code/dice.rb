@@ -3,12 +3,12 @@ require 'logger'
 class Dice
 	attr_reader :throws, :faces, :operator, :modifier, :replace, :results, :sum
 
-	PATTERN = /(?<entire>\(?(?<throws>\d+)[Dd](?<faces>\d{1,3})(\s*(?<operator>\+|-|\*|\/)?\s*(?<modifier>\d+)?)?\)?)(\s*(?<diceoperator>\+|-|\*|\/)?)?/
+	PATTERN = /(?<entire>\(?(?<throws>\d+)[Dd](?<faces>\d{1,3})(\s*(?<operator>\+|-|\*|\/)?\s*(?<modifier>\d+)?)?\)?)([\sa-zA-Z]*(?<diceoperator>\+|-|\*|\/)?)?/
 	DICE_TOKEN = "D"
 	RANDOM = Random.new
 
 	@@log = Logger.new(STDOUT)
-	@@log.level = Logger::WARN
+	@@log.level = Logger::DEBUG
 
 	def initialize(throws, faces, operator = nil, modifier = nil, replace = nil)
 		@throws = Integer(throws)
@@ -34,8 +34,7 @@ class Dice
 	def to_s
 		s = "#{@throws}#{DICE_TOKEN}#{@faces}#{@operator}#{@modifier}"
 		if @results.any? and @results.count > 1
-			s = "{ #{s} => #{@results} = #{@resultSum} } = #{@sum}"
-			s = "(#{s})"
+			s = "({ #{s} => #{@results} = #{@resultSum} } = #{@sum})"
 		elsif @results.any? and @results.count == 1
 			s = "{ #{s} => #{@sum} }"
 		end
@@ -67,10 +66,6 @@ class Dice
 		exp = []
 		exps.each do |d, dop|
 			d.roll
-			replaced = replaced.sub(d.replace, d.to_s)
-			exp << d.sum
-			exp << dop unless dop.nil?
-
 			@@log.debug("You made a throw of: #{d}")
 			@@log.debug("Number dies: #{d.throws}")
 			@@log.debug("Number faces: #{d.faces}")
@@ -78,7 +73,13 @@ class Dice
 			@@log.debug("Modifier: #{d.modifier}")
 			@@log.debug("Entire string: #{d.replace}")
 			@@log.debug("Your dice roll: #{d.to_s}")
+
+			replaced = replaced.sub(d.replace, d.to_s)
+			exp << d.sum
+			exp << dop unless dop.nil?
 		end
+
+		@@log.debug(exp.join)
 		sums = eval(exp.join)
 
 		if exp.count > 1

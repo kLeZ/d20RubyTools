@@ -10,6 +10,7 @@
 #Il profilo del personaggio (scheda) dovrà essere una dropdown DOPO il bottone di Sign Out
 #Tutte le funzioni andranno divise per categoria dentro dei TAB, nello spazio di "Logged members"
 #Mappa interattiva (o immagine statica) come sfondo del box "jumbo_header", espandibile
+#Prevedere un tab di note con bottone send-to-message-input (proprio al controllo senza fare il "vero" send)
 %>
 <div id="jumbo_header" class="jumbotron">
 	<div class="container-fluid">
@@ -45,13 +46,13 @@
 	<div id="row3" class="col-lg-4">
 		<ul class="nav nav-tabs" id="tabs">
 			<li class="active"><a href="#members-pane" data-toggle="tab">Logged members (<%= @room.members.count %>)</a></li>
-			<li><a href="#profile-pane" data-toggle="tab">Profile</a></li>
+			<li><a href="#profile-pane" data-toggle="tab">Note</a></li>
 		</ul>
 		<div class="tab-content" style="border: 1px solid #eee; height: 251px;">
 			<div class="tab-pane fade in active" id="members-pane">
 				<%= render 'rooms/members_list' %>
 			</div>
-			<div class="tab-pane fade" id="profile-pane">This is the profile pane</div>
+			<div class="tab-pane fade" id="profile-pane">This is the notes pane</div>
 		</div>
 	</div>
 </div>
