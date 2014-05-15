@@ -10,24 +10,12 @@ class Evaluator
 	def initialize
 	end
 
-	def canManage(s)
+	def can_manage(s)
 		return false
 	end
 
 	def manage(message)
 		return message
-	end
-
-	chain_method :manage
-
-	def evaluate(s)
-		@@log.debug("Evaluating \'#{s}\'")
-		if canManage(s)
-			@@log.debug('Calling manage(s)')
-			return manage(s)
-		else
-			next_in_chain.manage(s)
-		end
 	end
 
 	def Evaluator.logger

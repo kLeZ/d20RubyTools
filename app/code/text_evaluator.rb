@@ -2,12 +2,12 @@ require 'logger'
 require_relative 'evaluator'
 
 class TextEvaluator < Evaluator
-	def canManage(s)
+	def can_manage(s)
 		return true
 	end
 
 	def manage(message)
-		@@log.info('TextEvaluator')
+		@@log.debug('TextEvaluator')
 		return message
 	end
 end
