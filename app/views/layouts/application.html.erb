@@ -6,7 +6,7 @@
 	<meta name="description" content="" />
 	<meta name="author" content="" />
 	<title>d20WebTools<%= yield :title %></title>
-	<%= favicon_link_tag '/images/favicon.png' %>
+	<%= favicon_link_tag '/images/favicon.ico' %>
 
 <% if not Rails.application.assets.find_asset(params[:controller]).nil? %>
 	<%= javascript_include_tag params[:controller] %>
@@ -41,15 +41,19 @@
 						<li class="<%= 'active' if params[:controller] == 'contact' %>">
 							<a href="/contact">Contact</a>
 						</li>
+					<% if user_signed_in? %>
 						<li class="dropdown <%= 'active' if params[:controller] == 'rooms' %>">
 							<%= render 'rooms/rooms_menu' %>
 						</li>
+					<% end %>
 					</ul>
 					<div class="navbar-right" style="height: 100%;">
 						<div class="navbar-collapse collapse">
 							<ul class="nav navbar-nav">
 								<%= render 'layouts/user_header' %>
+							<% if user_signed_in? %>
 								<%= render 'layouts/profile_menu' %>
+							<% end %>
 							</ul>
 						</div>
 					</div>
