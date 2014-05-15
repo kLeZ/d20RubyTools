@@ -42,13 +42,14 @@
 							<a href="/contact">Contact</a>
 						</li>
 						<li class="dropdown <%= 'active' if params[:controller] == 'rooms' %>">
-							<%= render 'layouts/rooms_menu' %>
+							<%= render 'rooms/rooms_menu' %>
 						</li>
 					</ul>
 					<div class="navbar-right" style="height: 100%;">
 						<div class="navbar-collapse collapse">
 							<ul class="nav navbar-nav">
 								<%= render 'layouts/user_header' %>
+								<%= render 'layouts/profile_menu' %>
 							</ul>
 						</div>
 					</div>
@@ -58,7 +59,7 @@
 		</div>
 	</div>
 	<%= render 'layouts/alert_notice' %>
-	<%= render 'layouts/new_room_popup' %>
+	<%= render 'rooms/new_room_popup' %>
 	<div class="container">
 		<%= yield %>
 		<footer class="navbar navbar-default navbar-fixed-bottom" role="navigation">

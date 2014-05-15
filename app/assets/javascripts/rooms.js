@@ -2,6 +2,8 @@
 // All this logic will automatically be available in application.js.
 // You can use CoffeeScript in this file: http://coffeescript.org/
 var animateScroll = false;
+var intervalId = null;
+var room_path = '';
 
 function scrollLog() {
 	if (animateScroll) {
@@ -18,12 +20,22 @@ function reloadChat(chat_url) {
 	scrollLog();
 };
 
-function initRoom(room_path) {
+function togglePolling() {
+	if (!intervalId) {
+		intervalId = setInterval("reloadChat('" + room_path + "')", 1000);
+	}
+	else {
+		clearInterval(intervalId);
+		intervalId = null;
+	}
+}
 
+function initRoom(room) {
+	room_path = room;
 	$(document).ready(function() {
 		reloadChat(room_path);
 		$('#message_body').focus();
-		setInterval("reloadChat('" + room_path + "')", 1000);
+		togglePolling();
 		$.ajaxSetup({
 			cache : true
 		});

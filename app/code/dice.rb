@@ -33,8 +33,12 @@ class Dice
 
 	def to_s
 		s = "#{@throws}#{DICE_TOKEN}#{@faces}#{@operator}#{@modifier}"
-		s = "{ #{s} => #{@results} = #{@resultSum} } = #{sum}" if @results.any?
-		s = "(#{s})"
+		if @results.any? and @results.count > 1
+			s = "{ #{s} => #{@results} = #{@resultSum} } = #{@sum}"
+			s = "(#{s})"
+		elsif @results.any? and @results.count == 1
+			s = "{ #{s} => #{@sum} }"
+		end
 		return s
 	end
 
@@ -76,8 +80,15 @@ class Dice
 			@@log.debug("Your dice roll: #{d.to_s}")
 		end
 		sums = eval(exp.join)
-		@@log.debug("Replaced string now is: #{replaced} :: #{sums}")
-		return "#{replaced} :: #{sums}"
+
+		if exp.count > 1
+			ret = "#{replaced} :: #{sums}"
+		else
+			ret = replaced
+		end
+
+		@@log.debug("Replaced string now is: #{ret}")
+		return ret
 	end
 
 	def Dice.logger
