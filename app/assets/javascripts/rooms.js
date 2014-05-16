@@ -35,15 +35,16 @@ function reloadMembers() {
 }
 
 function togglePolling() {
-	if (!chatIntervalId) {
+	if (!chatIntervalId && !membersIntervalId) {
 		chatIntervalId = setInterval("reloadChat()", 1000);
 		membersIntervalId = setInterval("reloadMembers()", 1000);
-	}
-	else {
+		$('#polling-switch').html('<i class="fa fa-refresh"></i> Switch autorefresh (<i class="fa fa-circle-o"></i>)')
+	} else {
 		clearInterval(chatIntervalId);
 		clearInterval(membersIntervalId);
 		chatIntervalId = null;
 		membersIntervalId = null;
+		$('#polling-switch').html('<i class="fa fa-refresh"></i> Switch autorefresh (<i class="fa fa-circle"></i>)')
 	}
 }
 
@@ -64,15 +65,17 @@ function initRoom(room_messages, list_members_room) {
 		scrollLog();
 	});
 
-	$("#members").tablecloth({ theme : "dark" });
+	$("#members").tablecloth({
+		theme : "dark"
+	});
 
 	$('#tabs a[href="#members-pane"]').tab('show');
-	$('#tabs a[href="#notes-pane"]').click(function (e) {
+	$('#tabs a[href="#notes-pane"]').click(function(e) {
 		e.preventDefault()
 		$(this).tab('show')
 	});
 
-//	$(window).bind('beforeunload', function() {
-//		return 'Please exit from the room with the exit link.';
-//	});
+	// $(window).bind('beforeunload', function() {
+	// return 'Please exit from the room with the exit link.';
+	// });
 }

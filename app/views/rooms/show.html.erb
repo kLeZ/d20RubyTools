@@ -27,7 +27,9 @@
 							<%= icon 'eraser' %> Clear chat (permanent)
 						<% end %>
 					</li>
-					<li><a href="#" onclick="javascript:togglePolling();"><%= icon 'refresh' %> Toggle polling</a></li>
+					<li>
+						<a href="#" onclick="javascript:togglePolling();" id="polling-switch"></a>
+					</li>
 				</ul>
 			</div>
 			<h1><%= @room.name %></h1>
