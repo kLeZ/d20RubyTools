@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
 	resources :rooms do
 		member do
+			get :list_members
 			put :exit
 		end
 

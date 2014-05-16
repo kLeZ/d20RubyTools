@@ -2,8 +2,10 @@
 // All this logic will automatically be available in application.js.
 // You can use CoffeeScript in this file: http://coffeescript.org/
 var animateScroll = false;
-var intervalId = null;
-var room_path = '';
+var chatIntervalId = null;
+var membersIntervalId = null;
+var room_messages_path = '';
+var list_members_room_path = '';
 
 function scrollLog() {
 	if (animateScroll) {
@@ -15,25 +17,38 @@ function scrollLog() {
 	}
 }
 
-function reloadChat(chat_url) {
-	$('#chatbox').load(chat_url);
+function reload(obj, url) {
+	$(obj).load(url);
+}
+
+function reloadChat() {
+	reload('#chatbox', room_messages_path);
 	scrollLog();
-};
+}
+
+function reloadMembers() {
+	reload('#members-pane', list_members_room_path);
+}
 
 function togglePolling() {
-	if (!intervalId) {
-		intervalId = setInterval("reloadChat('" + room_path + "')", 1000);
+	if (!chatIntervalId) {
+		chatIntervalId = setInterval("reloadChat()", 1000);
+		membersIntervalId = setInterval("reloadMembers()", 1000);
 	}
 	else {
-		clearInterval(intervalId);
-		intervalId = null;
+		clearInterval(chatIntervalId);
+		clearInterval(membersIntervalId);
+		chatIntervalId = null;
+		membersIntervalId = null;
 	}
 }
 
-function initRoom(room) {
-	room_path = room;
+function initRoom(room_messages, list_members_room) {
+	room_messages_path = room_messages;
+	list_members_room_path = list_members_room;
 	$(document).ready(function() {
-		reloadChat(room_path);
+		reloadChat();
+		reloadMembers();
 		$('#message_body').focus();
 		togglePolling();
 		$.ajaxSetup({
@@ -48,7 +63,7 @@ function initRoom(room) {
 	$("#members").tablecloth({ theme : "dark" });
 
 	$('#tabs a[href="#members-pane"]').tab('show');
-	$('#tabs a[href="#profile-pane"]').click(function (e) {
+	$('#tabs a[href="#notes-pane"]').click(function (e) {
 		e.preventDefault()
 		$(this).tab('show')
 	});

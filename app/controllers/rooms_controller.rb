@@ -21,6 +21,7 @@ class RoomsController < ApplicationController
 		else
 			@room.members.select { |m| m.user.username == current_user.username }.each do |m|
 				m.is_online = true
+				m.save
 			end
 		end
 		@room.save
@@ -39,15 +40,26 @@ class RoomsController < ApplicationController
 
 	def exit
 		@room = Room.find(params[:id])
-		Member.find_by(user: current_user, room: @room).is_online = false
-		#@room.members.delete(Member.find_by(user: current_user, room: @room))
+		m = Member.find_by(user: current_user, room: @room)
+		m.is_online = false
+		m.save
 
 		@room.save
 
 		redirect_to rooms_path
 	end
 
+	def list_members
+		@room = Room.find(params[:id])
+		respond_to do |format|
+			format.html { render :members_list, :layout => false }
+			format.xml  { render xml: @room.members }
+			format.json { render json: @room.members }
+		end
+	end
+
 	private
+
 	def room_params
 		params.require(:room).permit(:name)
 	end

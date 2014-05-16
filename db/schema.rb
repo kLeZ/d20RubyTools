@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20140516072339) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_online"
+    t.boolean  "is_online",  default: false, null: false
   end
 
   add_index "members", ["room_id"], name: "index_members_on_room_id", using: :btree
