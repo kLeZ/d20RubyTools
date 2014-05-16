@@ -7,6 +7,10 @@ var membersIntervalId = null;
 var room_messages_path = '';
 var list_members_room_path = '';
 
+function appendNote() {
+	$('#message_body').val($('#notes').val());
+}
+
 function scrollLog() {
 	if (animateScroll) {
 		$("#chatbox").animate({

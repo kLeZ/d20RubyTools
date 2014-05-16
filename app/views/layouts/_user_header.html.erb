@@ -9,7 +9,10 @@
 <li>
 	<div class="btn-group btn-block">
 		<span class="nav" style="color: white; vertical-align: middle; height: 100%;">
-			<%= link_to "Sign Out", destroy_user_session_path, :method => :delete, :style => ' margin: 8px 0 0 5px;', :class => 'btn btn-danger' %>
+
+			<%= link_to destroy_user_session_path, :method => :delete, :style => ' margin: 8px 0 0 5px;', :class => 'btn btn-danger' do %>
+				<%= icon 'sign-out' %> Sign out
+			<% end %>
 		</span>
 	</div>
 </li>

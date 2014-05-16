@@ -17,9 +17,17 @@
 		<div class="row-fluid">
 			<div class="offset1 span8 pull-right">
 				<ul class="nav">
-					<li><%= link_to "Exit room", exit_room_path, :method => :put %></li>
-					<li><%= link_to "Clear chat (this action cannot be reverted)", clear_room_messages_path(@room), :method => :put %></li>
-					<li><a href="#" onclick="javascript:togglePolling();">Toggle polling</a></li>
+					<li>
+						<%= link_to exit_room_path, :method => :put do %>
+							<%= icon 'sign-out' %> Exit room
+						<% end %>
+					</li>
+					<li>
+						<%= link_to clear_room_messages_path(@room), :method => :put do %>
+							<%= icon 'eraser' %> Clear chat (permanent)
+						<% end %>
+					</li>
+					<li><a href="#" onclick="javascript:togglePolling();"><%= icon 'refresh' %> Toggle polling</a></li>
 				</ul>
 			</div>
 			<h1><%= @room.name %></h1>
@@ -45,19 +53,14 @@
 	</div>
 	<div id="row3" class="col-lg-4">
 		<ul class="nav nav-tabs" id="tabs">
-			<li class="active"><a href="#members-pane" data-toggle="tab">Logged members (<%= @room.members.count %>)</a></li>
+			<li class="active"><a href="#members-pane" data-toggle="tab">Members (<%= @room.members.count %>)</a></li>
 			<li><a href="#notes-pane" data-toggle="tab">Note</a></li>
 		</ul>
 		<div class="tab-content" style="border: 1px solid #eee; height: 251px;">
 			<div class="tab-pane fade in active" id="members-pane"></div>
 			<div class="tab-pane fade boxsizingBorder" style="display: block; width: 359px; height: 100%; padding: 0;" id="notes-pane">
 				<textarea class="boxsizingBorder" style="width: 360px; height: 100%; margin: 0;" id="notes"></textarea>
-				<input type="button" onclick="javascript:appendNote();" class="btn btn-primary" value="Send to messageboard" />
-				<script type="text/javascript">
-					function appendNote() {
-						$('#message_body').val($('#notes').val());
-					}
-				</script>
+				<a href="#" onclick="javascript:appendNote();" class="btn btn-primary"><%= icon 'share' %> Send to messageboard</a>
 			</div>
 		</div>
 	</div>

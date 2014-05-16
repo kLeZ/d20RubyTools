@@ -39,6 +39,7 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'debugger', group: [:development, :test]
 
 gem 'bootstrap-sass'
+gem 'font-awesome-sass'
 gem 'bootswatch-rails'
 gem 'rails_bootstrap_navbar'
 gem 'formtastic-bootstrap'
