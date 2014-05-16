@@ -1,0 +1,48 @@
+## C'è da disegnare il DB, non può essere una unica tabella, deve essere MOLTO strutturato
+## e è pieno di anagrafiche
+
+## Comando da lanciare (INCOMPLETO)
+rails g model Character name:string age:integer description:text strength:integer dexterity:integer constitution:integer intelligence:integer wisdom:integer charisma:integer class:string race:string level:integer armor_class:integer weapon:string armor:string shield:string hp:integer bab:integer size:integer exp:integer fortitude:integer reflex:integer will:integer
+
+
+## Lista Abilità
+Appraise
+Autohypnosis
+Balance
+Bluff
+Climb
+Concentration
+Control Shape
+Craft
+Decipher Script
+Diplomacy
+Disable Device
+Disguise
+Escape Artist
+Forgery
+Gather Information
+Handle Animal
+Heal
+Hide
+Intimidate
+Jump
+Knowledge
+Listen
+Move Silently
+Open Lock
+Perform
+Psicraft
+Profession
+Ride
+Search
+Sense Motive
+Sleight of Hand
+Speak Language
+Spellcraft
+Spot
+Survival
+Swim
+Tumble
+Use Magic Device
+Use Psionic Device
+Use Rope
