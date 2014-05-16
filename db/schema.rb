@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140511204449) do
+ActiveRecord::Schema.define(version: 20140516072339) do
 
   create_table "members", force: true do |t|
     t.integer  "room_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_online"
   end
 
   add_index "members", ["room_id"], name: "index_members_on_room_id", using: :btree

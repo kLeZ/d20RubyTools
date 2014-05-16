@@ -1,0 +1,37 @@
+/*
+	Place all the styles related to the Rooms controller here.
+	They will automatically be included in application.css.
+	You can use Sass (SCSS) here: http://sass-lang.com/
+*/
+
+#jumbo_header {
+	padding: 0px;
+	margin: 0px;
+}
+
+#row1 {
+	width: 66.66666666666666% !important;
+}
+
+#chatbox {
+	text-align: left;
+	margin: 0 auto;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	padding: 10px;
+	background: #fff;
+	height: 230px;
+	width: auto;
+	border: 1px solid #ACD8F0;
+	overflow: auto;
+	margin-bottom: 25px;
+}
+
+.form-group,.form-group button,.form-group input {
+	float: left;
+	display: inline;
+}
+
+.form-group {
+	margin-right: 5px
+}

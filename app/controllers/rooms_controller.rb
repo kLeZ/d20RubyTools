@@ -16,11 +16,14 @@ class RoomsController < ApplicationController
 	def show
 		@room = Room.find(params[:id])
 		if not @room.members.select { |m| m.user.username == current_user.username }.any?
-			member = Member.new(:user => current_user, :room => @room)
+			member = Member.new(:user => current_user, :room => @room, :is_online => true)
 			@room.members << member
-
-			@room.save
+		else
+			@room.members.select { |m| m.user.username == current_user.username }.each do |m|
+				m.is_online = true
+			end
 		end
+		@room.save
 	end
 
 	def destroy
@@ -36,7 +39,8 @@ class RoomsController < ApplicationController
 
 	def exit
 		@room = Room.find(params[:id])
-		@room.members.delete(Member.find_by(user: current_user, room: @room))
+		Member.find_by(user: current_user, room: @room).is_online = false
+		#@room.members.delete(Member.find_by(user: current_user, room: @room))
 
 		@room.save
 

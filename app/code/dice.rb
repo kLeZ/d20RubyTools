@@ -8,7 +8,7 @@ class Dice
 	RANDOM = Random.new
 
 	@@log = Logger.new(STDOUT)
-	@@log.level = Logger::DEBUG
+	@@log.level = Logger::WARN
 
 	def initialize(throws, faces, operator = nil, modifier = nil, replace = nil)
 		@throws = Integer(throws)
