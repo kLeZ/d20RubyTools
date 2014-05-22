@@ -1,0 +1,6 @@
+      invoke  active_record
+      remove    db/migrate/20140522184856_create_feat_templates.rb
+      remove    app/models/feat_template.rb
+      invoke    test_unit
+      remove      test/models/feat_template_test.rb
+      remove      test/fixtures/feat_templates.yml

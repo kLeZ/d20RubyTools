@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  begin_level: 1
+  end_level: 1
+  overpower_level: 1
+  begin_exp: 1
+  end_exp: 1
+  overpower_exp: 1
+  levelup_factor_formula: MyString
+
+two:
+  begin_level: 1
+  end_level: 1
+  overpower_level: 1
+  begin_exp: 1
+  end_exp: 1
+  overpower_exp: 1
+  levelup_factor_formula: MyString
