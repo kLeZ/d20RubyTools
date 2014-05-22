@@ -1,0 +1,7 @@
+:: CHARACTER ::
+rpg_template_id = 1 -- name:'D&D/d20'
+character_template_id = 1 -- name:'Julius'
+level_template_id = 1 -- begin:1, end:20, begin_exp:0, end_exp:20, lvlup_factor:'current_level+1000'
+stats_template_id = 1,2,3,4,5,6 -- name:{str,dex,con,int,wis,cha}
+
+:: STATS ::
