@@ -1,7 +1,33 @@
 :: CHARACTER ::
+id:1 -- MINE
 rpg_template_id = 1 -- name:'D&D/d20'
 character_template_id = 1 -- name:'Julius'
 level_template_id = 1 -- begin:1, end:20, begin_exp:0, end_exp:20, lvlup_factor:'current_level+1000'
 stats_template_id = 1,2,3,4,5,6 -- name:{str,dex,con,int,wis,cha}
+[][][][][][][][][][][][]
 
 :: STATS ::
+character_id = 1 -- => character_template_id:1 => name:'Julius'
+stats_template_id = 1
+value = 16
+[][][][][][][][][][][][]
+character_id = 1 -- => character_template_id:1 => name:'Julius'
+stats_template_id = 2
+value = 15
+[][][][][][][][][][][][]
+character_id = 1 -- => character_template_id:1 => name:'Julius'
+stats_template_id = 3
+value = 14
+[][][][][][][][][][][][]
+character_id = 1 -- => character_template_id:1 => name:'Julius'
+stats_template_id = 4
+value = 10
+[][][][][][][][][][][][]
+character_id = 1 -- => character_template_id:1 => name:'Julius'
+stats_template_id = 5
+value = 10
+[][][][][][][][][][][][]
+character_id = 1 -- => character_template_id:1 => name:'Julius'
+stats_template_id = 6
+value = 8
+[][][][][][][][][][][][]
