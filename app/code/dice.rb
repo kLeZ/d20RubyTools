@@ -9,7 +9,6 @@ class Dice
 
 	@@log = Logger.new(STDOUT)
 	@@log.level = Logger::WARN
-
 	def initialize(throws, faces, operator = nil, modifier = nil, replace = nil)
 		@throws = Integer(throws)
 		@faces = Integer(faces)
@@ -97,6 +96,8 @@ class Dice
 	end
 end
 
-#Dice.logger.level = Logger::DEBUG
-#puts Dice.parseManyShowResults('(1d20 + 13) + (3d4) * (4d6 - 1) + (25d12 + 35) - (25d12 / 76)')
-#puts Dice.parseManyShowResults('This is a string in which I can play D&D. Now roll (1d6) + for example, and then a will save by 1d20+5')
+if __FILE__ == $0
+	Dice.logger.level = Logger::DEBUG
+	puts Dice.parseManyShowResults('(1d20 + 13) + (3d4) * (4d6 - 1) + (25d12 + 35) - (25d12 / 76)')
+	puts Dice.parseManyShowResults('This is a string in which I can play D&D. Now roll (1d6) + for example, and then a will save by 1d20+5')
+end

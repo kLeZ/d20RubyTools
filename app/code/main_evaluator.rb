@@ -1,4 +1,5 @@
 require 'logger'
+
 require_relative 'evaluator'
 require_relative 'dice_evaluator'
 
@@ -21,15 +22,17 @@ class MainEvaluator < Evaluator
 	end
 end
 
-#Evaluator.logger.level = Logger::DEBUG
+if __FILE__ == $0
+	Evaluator.logger.level = Logger::DEBUG
 
-#messages = [
-#	'This is NOT a D&D message.',
-#	'This is a D&D message, in which I roll 1d20+3'
-#]
+	messages = [
+		'This is NOT a D&D message.',
+		'This is a D&D message, in which I roll 1d20+3'
+	]
 
-#evaluator = MainEvaluator.new
-#messages.each do |message|
-#	body = evaluator.evaluate(message)
-#	puts body
-#end
+	evaluator = MainEvaluator.new
+	messages.each do |message|
+		body = evaluator.evaluate(message)
+		puts body
+	end
+end
