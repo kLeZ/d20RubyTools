@@ -14,10 +14,14 @@
 	<tr>
 		<td><strong style="font-size: large;"><%= room.name %></strong></td>
 		<td style="text-align: right;">
-			<%= link_to 'Join', room_path(room), :class => 'btn btn-primary' %>
-			<%= link_to 'Destroy', room_path(room), method: :delete,
+			<%= link_to room_path(room), :class => 'btn btn-success' do %>
+				<%= icon 'sign-in' %>
+			<% end %>
+			<%= link_to room_path(room), method: :delete,
 						 data: { confirm: 'Are you sure?' },
-						:class => 'btn btn-primary' %>
+						:class => 'btn btn-danger' do %>
+				<span class="glyphicon glyphicon-trash"></span>
+			<% end %>
 		</td>
 	</tr>
 	<% end %>

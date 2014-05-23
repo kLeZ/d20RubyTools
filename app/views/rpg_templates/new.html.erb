@@ -3,3 +3,23 @@
 	<%= stylesheet_link_tag "tablecloth", "prettify" %>
 	<%= javascript_include_tag "jquery.metadata", "jquery.tablesorter", "jquery.tablecloth" %>
 <% end %>
+
+<h2>New RPG Template</h2>
+<%= form_for(:rpg_template, :url => rpg_templates_path(:rpg_template)) do |f| %>
+	<div class="panel panel-default">
+		<div class="panel-heading" style="padding-bottom: 5px;">General informations</div>
+		<div class="panel-body">
+			<div class="input-control" style="margin: 3px;">
+				<%= f.label 'RPG System Name' %>
+				<%= f.text_field :name, :placeholder => 'D&D v3.5', :class=> 'form-control' %>
+			</div>
+			<div class="input-control" style="margin: 3px;">
+				<%= f.label 'Default dice for checks' %>
+				<%= f.text_field :default_dice, :placeholder => '1d20', :class=> 'form-control' %>
+			</div>
+		</div>
+		<div class="panel-heading" style="padding-bottom: 5px;">...</div>
+		<div class="panel-body">...</div>
+	</div>
+	<%= f.submit "Create!", :class => 'btn btn-success' %>
+<% end %>
