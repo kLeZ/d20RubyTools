@@ -45,6 +45,9 @@
 						<li class="dropdown <%= 'active' if params[:controller] == 'rooms' %>">
 							<%= render 'rooms/rooms_menu' %>
 						</li>
+						<li class="<%= 'active' if params[:controller] == 'rpg_templates' %>">
+							<%= link_to 'RPG Templates', rpg_templates_path %>
+						</li>
 					<% end %>
 					</ul>
 					<div class="navbar-right" style="height: 100%;">

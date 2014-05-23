@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 	devise_for :users
 
+	resources :rpg_templates
+
 	resources :rooms do
 		member do
 			get :list_members

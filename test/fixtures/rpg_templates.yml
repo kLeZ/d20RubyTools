@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  default_dice: MyString
+  has_classes: false
+  has_levels: false
+  has_feats: false
+  has_skills: false
+  has_passive_defense: false
+  feat_template_id: 
+  skill_template_id: 
+  stat_template_id: 
+  level_template_id: 
+  health_points_template_id: 
+
+two:
+  name: MyString
+  default_dice: MyString
+  has_classes: false
+  has_levels: false
+  has_feats: false
+  has_skills: false
+  has_passive_defense: false
+  feat_template_id: 
+  skill_template_id: 
+  stat_template_id: 
+  level_template_id: 
+  health_points_template_id: 
