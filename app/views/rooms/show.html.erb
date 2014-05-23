@@ -4,14 +4,8 @@
 	<%= javascript_include_tag "jquery.metadata", "jquery.tablesorter", "jquery.tablecloth" %>
 <% end %>
 <script type="text/javascript">
-	initRoom("<%= room_messages_path(@room) %>", "<%= list_members_room_path(@room) %>");
+	initRoom("<%= room_messages_path(@room) %>", "<%= list_members_room_path(@room) %>", "<%= exit_room_path(@room) %>");
 </script>
-<%
-#Il profilo del personaggio (scheda) dovrà essere una dropdown DOPO il bottone di Sign Out
-#Tutte le funzioni andranno divise per categoria dentro dei TAB, nello spazio di "Logged members"
-#Mappa interattiva (o immagine statica) come sfondo del box "jumbo_header", espandibile
-#Prevedere un tab di note con bottone send-to-message-input (proprio al controllo senza fare il "vero" send)
-%>
 <div id="jumbo_header" class="jumbotron">
 	<div class="container-fluid">
 		<div class="row-fluid">

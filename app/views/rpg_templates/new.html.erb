@@ -1,2 +1,5 @@
-<h1>RpgTemplate#new</h1>
-<p>Find me in app/views/rpg_template/new.html.erb</p>
+<% content_for :title do %> - New RPG Template<% end %>
+<% content_for :head do %>
+	<%= stylesheet_link_tag "tablecloth", "prettify" %>
+	<%= javascript_include_tag "jquery.metadata", "jquery.tablesorter", "jquery.tablecloth" %>
+<% end %>

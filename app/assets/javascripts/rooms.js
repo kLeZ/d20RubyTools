@@ -6,6 +6,7 @@ var chatIntervalId = null;
 var membersIntervalId = null;
 var room_messages_path = '';
 var list_members_room_path = '';
+var exit_room_path = '';
 
 function appendNote() {
 	$('#message_body').val($('#notes').val());
@@ -38,19 +39,22 @@ function togglePolling() {
 	if (!chatIntervalId && !membersIntervalId) {
 		chatIntervalId = setInterval("reloadChat()", 1000);
 		membersIntervalId = setInterval("reloadMembers()", 1000);
-		$('#polling-switch').html('<i class="fa fa-refresh"></i> Switch autorefresh (<i class="fa fa-circle-o"></i>)')
+		$('#polling-switch')
+				.html('<i class="fa fa-refresh"></i> Switch autorefresh (<i class="fa fa-circle-o"></i>)')
 	} else {
 		clearInterval(chatIntervalId);
 		clearInterval(membersIntervalId);
 		chatIntervalId = null;
 		membersIntervalId = null;
-		$('#polling-switch').html('<i class="fa fa-refresh"></i> Switch autorefresh (<i class="fa fa-circle"></i>)')
+		$('#polling-switch')
+				.html('<i class="fa fa-refresh"></i> Switch autorefresh (<i class="fa fa-circle"></i>)')
 	}
 }
 
-function initRoom(room_messages, list_members_room) {
+function initRoom(room_messages, list_members_room, exit_room) {
 	room_messages_path = room_messages;
 	list_members_room_path = list_members_room;
+	exit_room_path = exit_room;
 	$(document).ready(function() {
 		reloadChat();
 		reloadMembers();
@@ -75,7 +79,16 @@ function initRoom(room_messages, list_members_room) {
 		$(this).tab('show')
 	});
 
-	// $(window).bind('beforeunload', function() {
-	// return 'Please exit from the room with the exit link.';
-	// });
+	$(window).bind('beforeunload', function() {
+		$.ajax({
+			url : exit_room_path,
+			type : 'PUT',
+			success : function(result) {
+			}
+		});
+	});
+
+	$('#new_message').submit(function() {
+		window.onbeforeunload = null;
+	});
 }
