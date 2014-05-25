@@ -18,11 +18,15 @@
 // Then bootstrap itself
 @import "bootstrap";
 
-// Bootstrap body padding for fixed navbar
-body { padding-top: 60px; }
+* { font-family: 'Open Sans'; }
 
-// Responsive styles go here in case you want them
-@import "bootstrap/theme";
+// Bootstrap body padding for fixed navbar
+body {
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 60px;
+	padding-left: 0px;
+}
 
 /* User sign in and sign forms. */
 .border-form-div {

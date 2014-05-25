@@ -13,8 +13,8 @@
 	<%= stylesheet_link_tag params[:controller] %>
 <% end %>
 
-	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	<%= stylesheet_link_tag		'application', media: 'all', 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag	'application', 'jquery.loadTemplate.min', 'data-turbolinks-track' => true %>
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -24,57 +24,61 @@
 	<%= yield :head %>
 </head>
 <body>
-	<div class="navbar navbar-inverse navbar-fixed-top active">
-		<div class="navbar-inner">
-			<div class="container"style="width: auto;">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="/">d20 Web Tools</a>
-				</div>
-				<div class="navbar-collapse collapse">
-					<ul class="nav navbar-nav">
-						<li class="<%= 'active' if params[:controller] == 'welcome' %>">
-							<a href="/index"><%= icon 'home' %> Home</a>
-						</li>
-						<li class="<%= 'active' if params[:controller] == 'about' %>">
-							<a href="/about">
-								<span class="glyphicon glyphicon-info-sign"></span> About
-							</a>
-						</li>
-						<li class="<%= 'active' if params[:controller] == 'contact' %>">
-							<a href="/contact"><%= icon 'support' %> Contact</a>
-						</li>
-					<% if user_signed_in? %>
-						<li class="dropdown <%= 'active' if params[:controller] == 'rooms' %>">
-							<%= render 'rooms/rooms_menu' %>
-						</li>
-						<li class="<%= 'active' if params[:controller] == 'rpg_templates' %>">
-							<%= link_to 'RPG Templates', rpg_templates_path %>
-						</li>
-					<% end %>
-					</ul>
-					<div class="navbar-right" style="height: 100%;">
-						<div class="navbar-collapse collapse">
-							<ul class="nav navbar-nav">
-								<%= render 'layouts/user_header' %>
-							<% if user_signed_in? %>
-								<%= render 'layouts/profile_menu' %>
-							<% end %>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<!--/.navbar-collapse -->
+	<nav class="navbar navbar-inverse navbar-static-top active" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" class="navbar-toggle" type="button">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="/" class="navbar-brand">d20 Web Tools</a>
 			</div>
+			<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li class="<%= 'active' if params[:controller] == 'welcome' %>">
+					<a href="/index"><%= icon 'home' %> Home</a>
+				</li>
+				<li class="<%= 'active' if params[:controller] == 'about' %>">
+					<a href="/about">
+						<span class="glyphicon glyphicon-info-sign"></span> About
+					</a>
+				</li>
+				<li class="<%= 'active' if params[:controller] == 'contact' %>">
+					<a href="/contact"><%= icon 'support' %> Contact</a>
+				</li>
+			<% if user_signed_in? %>
+				<li class="dropdown <%= 'active' if params[:controller] == 'rooms' %>">
+					<%= render 'rooms/rooms_menu' %>
+				</li>
+				<li class="<%= 'active' if params[:controller] == 'rpg_templates' %>">
+					<%= link_to 'RPG Templates', rpg_templates_path %>
+				</li>
+			<% end %>
+			</ul>
+	<!-- 			<form role="search" class="navbar-form navbar-left"> -->
+	<!-- 				<div class="form-group"> -->
+	<!-- 					<input type="text" placeholder="Search" class="form-control"> -->
+	<!-- 				</div> -->
+	<!-- 				<button class="btn btn-default" type="submit">Submit</button> -->
+	<!-- 			</form> -->
+			<ul class="nav navbar-nav navbar-right" style="margin-right: 15px;">
+				<%= render 'layouts/user_header' %>
+				<% if user_signed_in? %>
+					<%= render 'layouts/profile_menu' %>
+				<% end %>
+			</ul>
 		</div>
-	</div>
+		</div>
+	</nav>
 	<%= render 'layouts/alert_notice' %>
 	<%= render 'rooms/new_room_popup' %>
 	<div class="container">
 		<%= yield %>
-		<footer class="navbar navbar-default navbar-fixed-bottom" role="navigation">
-			<p style="padding: 10px;">&copy; D4nGuARd 2014</p>
-		</footer>
 	</div>
-	<!-- /container -->
+	<footer class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+		<p style="padding: 10px;">&copy; D4nGuARd 2014</p>
+	</footer>
 </body>
 </html>

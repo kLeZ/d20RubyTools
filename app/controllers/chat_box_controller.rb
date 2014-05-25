@@ -4,12 +4,16 @@ class ChatBoxController < ApplicationController
 	def create
 		@room = Room.find(params[:room_id])
 
-		evaluator = MainEvaluator.new
-		body = evaluator.evaluate(params[:message][:body])
-		message = Message.new(:body => body, :user => current_user, :room => @room)
-		@room.messages << message
+		if not params[:message][:body].to_s.strip.empty?
+			evaluator = MainEvaluator.new
+			body = evaluator.evaluate(params[:message][:body])
+			message = Message.new(:body => body, :user => current_user, :room => @room)
+			@room.messages << message
 
-		@room.save
+			@room.save
+		else
+			flash[:alert] = "You cannot specify a blank text! Write something into the message board!"
+		end
 
 		redirect_to room_path(@room)
 	end

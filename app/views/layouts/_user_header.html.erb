@@ -1,10 +1,6 @@
 <% if user_signed_in? %>
 <li>
-	<div class="btn-group btn-block" style="vertical-align: middle; margin: 15px;">
-		<span class="nav" style="color: white; height: 100%;">
-			Welcome back, <%=current_user.username %>!
-		</span>
-	</div>
+	<p class="navbar-text">Welcome back, <%=current_user.username %>!</p>
 </li>
 <li>
 	<div class="btn-group btn-block">

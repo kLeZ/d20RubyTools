@@ -1,7 +1,7 @@
 <% content_for :title do %> - Room &quot;<%= @room.name %>&quot;<% end %>
 <% content_for :head do %>
 	<%= stylesheet_link_tag "tablecloth", "prettify" %>
-	<%= javascript_include_tag "jquery.metadata", "jquery.tablesorter", "jquery.tablecloth" %>
+	<%= javascript_include_tag "jquery.metadata", "jquery.tablesorter", "jquery.tablecloth", "jquery.validate.min", "additional-methods.min" %>
 <% end %>
 <script type="text/javascript">
 	initRoom("<%= room_messages_path(@room) %>", "<%= list_members_room_path(@room) %>", "<%= exit_room_path(@room) %>");
@@ -37,12 +37,22 @@
 		<div id="chatbox" class="row"></div>
 		<%= form_for [@room, @room.messages.build], :id => 'send-message', :role => 'form', :class => 'form-inline' do |f| %>
 			<div class="input-group" style="width: 100%;">
-				<%= f.text_field :body, :class=> 'form-control' %>
+				<%= f.text_field :body, :class=> 'form-control', required: "" %>
 				<span class="input-group-btn" style="width: 1%;">
 					<%= f.submit "Send", :id => 'message_send', :class => 'btn btn-primary', :style => 'height: 34px;' %>
 				</span>
 			</div>
 		<% end %>
+		<script>
+		$('#send-message').validate({
+			rules: {
+				message_body: {
+					required: true,
+					minlength: 1
+				}
+			},
+		});
+		</script>
 	</div>
 	<div id="row2" class="col-lg-4">
 		&nbsp;

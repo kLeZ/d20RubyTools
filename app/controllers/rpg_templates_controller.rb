@@ -12,15 +12,12 @@ class RpgTemplatesController < ApplicationController
 	end
 
 	def create
+		render json: params
 	end
 
 	def edit
 	end
 
 	def destroy
-	end
-
-	def room_params
-		params.require(:rpg_template).permit(:name)
 	end
 end
