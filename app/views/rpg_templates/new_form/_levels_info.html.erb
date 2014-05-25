@@ -1,18 +1,10 @@
-<script type="text/javascript">
-addNavigationItem({
-	title: 'Levels informations'
-});
-</script>
-
-<div class="panel-heading">
-	<h4 id="levels-info">
-		<a data-toggle="collapse" data-parent="#accordion" href="#collapseLevels">
-			Levels informations
-		</a>
-	</h4>
-</div>
-<div id="collapseLevels" class="panel-collapse collapse">
-	<div class="panel-body">
+<%= render(layout: 'rpg_templates/new_form/partial_info_template', \
+		locals: {
+			info_id: "levels-info", \
+			info_title: "Levels informations", \
+			info_collapse_id: "collapseLevels" \
+		}) \
+	do %>
 	<%= f.fields_for :level_template do |l| %>
 		<div class="input-control" style="margin: 3px;">
 			<%= l.label 'Begin level' %>
@@ -48,36 +40,35 @@ addNavigationItem({
 			</div>
 		</div>
 	<% end %>
-	</div>
-</div>
-<div class="modal fade" id="levels-help" tabindex="-1" role="dialog" aria-labelledby="levels-help-label" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button data-dismiss="modal" class="close">&times;</button>
-				<h3>Levels formula Help</h3>
-			</div>
-			<div class="modal-body">
-				<ul class="nav nav-tabs nav-justified" id="tabs" style="margin-bottom: -1px;">
-					<li class="active"><a href="#why-pane" data-toggle="tab">Why</a></li>
-					<li><a href="#vars-pane" data-toggle="tab">Accepted variables</a></li>
-				</ul>
-				<div class="tab-content panel panel-default" style="padding: 15px; margin: 0px;">
-					<div class="tab-pane fade in active" id="why-pane">
-						<p>There are many placeholders that you can use to specify your level-up formula for calculations.</p>
-						<p>
-							A level-up formula is a math-like formula with some variables (such as an 'x' in an equation),
-							that can help us calculate the experience soils for the levels you specified.<br />
-							For example you can specify levels from 1 to 20, as in d20 system, and you can specify an experience of 0 (zero) at level 1,
-							and an experience of 190.000 as the soil of 20<sup>th</sup> level.<br /><br />
-							But the middle levels? They'd be calculated in some way, because we don't want to specify each of the levels, as it will be boring,
-							and it would become a very very long page to fill when you have an hundred levels in your rpg rules.
-						</p>
-					</div>
-					<div class="tab-pane fade in active" id="vars-pane">
+	<div class="modal fade" id="levels-help" tabindex="-1" role="dialog" aria-labelledby="levels-help-label" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close">&times;</button>
+					<h3>Levels formula Help</h3>
+				</div>
+				<div class="modal-body">
+					<ul class="nav nav-tabs nav-justified" id="tabs" style="margin-bottom: -1px;">
+						<li class="active"><a href="#why-pane" data-toggle="tab">Why</a></li>
+						<li><a href="#vars-pane" data-toggle="tab">Accepted variables</a></li>
+					</ul>
+					<div class="tab-content panel panel-default" style="padding: 15px; margin: 0px;">
+						<div class="tab-pane fade in active" id="why-pane">
+							<p>There are many placeholders that you can use to specify your level-up formula for calculations.</p>
+							<p>
+								A level-up formula is a math-like formula with some variables (such as an 'x' in an equation),
+								that can help us calculate the experience soils for the levels you specified.<br />
+								For example you can specify levels from 1 to 20, as in d20 system, and you can specify an experience of 0 (zero) at level 1,
+								and an experience of 190.000 as the soil of 20<sup>th</sup> level.<br /><br />
+								But the middle levels? They'd be calculated in some way, because we don't want to specify each of the levels, as it will be boring,
+								and it would become a very very long page to fill when you have an hundred levels in your rpg rules.
+							</p>
+						</div>
+						<div class="tab-pane fade in active" id="vars-pane">
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
+<% end %>

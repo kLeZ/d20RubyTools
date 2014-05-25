@@ -1,54 +1,46 @@
-<script type="text/javascript">
-addNavigationItem({
-	title: 'General informations'
-});
-</script>
-<div class="panel-heading">
-	<h4 id="general-info">
-		<a data-toggle="collapse" data-parent="#accordion" href="#collapseGeneral">
-			General informations
-		</a>
-	</h4>
-</div>
-<div id="collapseGeneral" class="panel-collapse collapse">
-	<div class="panel-body">
-		<div class="input-control" style="margin: 3px;">
-			<%= f.label 'RPG System Name' %>
-			<%= f.text_field :name, :placeholder => 'D&D v3.5', :class=> 'form-control' %>
-		</div>
-		<div class="input-control" style="margin: 3px;">
-			<%= f.label 'Default dice for checks' %>
-			<%= f.text_field :default_dice, :placeholder => '1d20', :class=> 'form-control' %>
-		</div>
-		<div class="input-group panel panel-default" style="margin: 5px 0 5px 0;">
-			<span class="input-group-addon" style="border: 0px;"><%= f.check_box :has_classes %></span>
-			<div class="panel-body">
-				<a href="#classes-info"><%= f.label 'Has the concept of classes?' %></a>
-			</div>
-		</div>
-		<div class="input-group panel panel-default" style="margin: 5px 0 5px 0;">
-			<span class="input-group-addon" style="border: 0px;"><%= f.check_box :has_levels %></span>
-			<div class="panel-body">
-				<a href="#levels-info"><%= f.label 'Has the concept of levels?' %></a>
-			</div>
-		</div>
-		<div class="input-group panel panel-default" style="margin: 5px 0 5px 0;">
-			<span class="input-group-addon" style="border: 0px;"><%= f.check_box :has_feats %></span>
-			<div class="panel-body">
-				<a href="#feats-info"><%= f.label 'Can a character use feats?' %></a>
-			</div>
-		</div>
-		<div class="input-group panel panel-default" style="margin: 5px 0 5px 0;">
-			<span class="input-group-addon" style="border: 0px;"><%= f.check_box :has_skills %></span>
-			<div class="panel-body">
-				<a href="#skills-info"><%= f.label 'Can a character use skills?' %></a>
-			</div>
-		</div>
-		<div class="input-group panel panel-default" style="margin: 5px 0 5px 0;">
-			<span class="input-group-addon" style="border: 0px;"><%= f.check_box :has_passive_defense %></span>
-			<div class="panel-body">
-				<a href="#passive-defense-info"><%= f.label 'The attack is ported against a passive defense value or a player needs to roll a counter-check?' %></a>
-			</div>
+<%= render(layout: 'rpg_templates/new_form/partial_info_template', \
+		locals: {
+			info_id: "general-info", \
+			info_title: "General informations", \
+			info_collapse_id: "collapseGeneral" \
+		}) \
+	do %>
+	<div class="input-control" style="margin: 3px;">
+		<%= f.label 'RPG System Name' %>
+		<%= f.text_field :name, :placeholder => 'D&D v3.5', :class=> 'form-control' %>
+	</div>
+	<div class="input-control" style="margin: 3px;">
+		<%= f.label 'Default dice for checks' %>
+		<%= f.text_field :default_dice, :placeholder => '1d20', :class=> 'form-control' %>
+	</div>
+	<div class="input-group panel panel-default" style="margin: 5px 0 5px 0;">
+		<span class="input-group-addon" style="border: 0px;"><%= f.check_box :has_classes %></span>
+		<div class="panel-body">
+			<%= f.label 'Has the concept of classes?' %>
 		</div>
 	</div>
-</div>
+	<div class="input-group panel panel-default" style="margin: 5px 0 5px 0;">
+		<span class="input-group-addon" style="border: 0px;"><%= f.check_box :has_levels %></span>
+		<div class="panel-body">
+			<%= f.label 'Has the concept of levels?' %>
+		</div>
+	</div>
+	<div class="input-group panel panel-default" style="margin: 5px 0 5px 0;">
+		<span class="input-group-addon" style="border: 0px;"><%= f.check_box :has_feats %></span>
+		<div class="panel-body">
+			<%= f.label 'Can a character use feats?' %>
+		</div>
+	</div>
+	<div class="input-group panel panel-default" style="margin: 5px 0 5px 0;">
+		<span class="input-group-addon" style="border: 0px;"><%= f.check_box :has_skills %></span>
+		<div class="panel-body">
+			<%= f.label 'Can a character use skills?' %>
+		</div>
+	</div>
+	<div class="input-group panel panel-default" style="margin: 5px 0 5px 0;">
+		<span class="input-group-addon" style="border: 0px;"><%= f.check_box :has_passive_defense %></span>
+		<div class="panel-body">
+			<%= f.label 'The attack is ported against a passive defense value or a player needs to roll a counter-check?' %>
+		</div>
+	</div>
+<% end %>

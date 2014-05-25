@@ -9,29 +9,72 @@ var items = [];
 function addNavigationItem(item) {
 	items.push(item);
 }
+$.addTemplateFormatter({
+	anchor : function (value, template) {
+		return '#' + value;
+	}
+});
 </script>
 <script type="text/html" id="fixed-side-nav-template">
-	<li data-content="title" class="list-group-item"></li>
+	<li>
+		<a data-template-bind='[
+			{ "attribute": "href", "value": "id", "formatter": "anchor" },
+			{ "attribute": "content", "value": "title" }
+		]' href=""></a>
+	</li>
 </script>
-<ul id="fixed-side-nav" class="list-group" data-spy="affix scroll"></ul>
+<style>
+	#fixed-side-nav li.active {
+		border: 0 #ddd solid;
+		border-right-width: 5px;
+	}
+
+	.panel-heading h4 {
+		margin: 0;
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+</style>
+
+<div id="side-nav" data-spy="affix">
+	<ul id="fixed-side-nav" class="nav nav-stacked affix">
+	</ul>
+</div>
 
 <div class="border-form-div" style="max-width: 600px;">
 	<h2>New RPG Template</h2>
 	<%= form_for :rpg_template, :url => rpg_templates_path do |f| %>
-		<div class="panel panel-default" id="accordion">
+		<div id="accordion" class="panel panel-default" data-offset="0">
 			<%= render 'rpg_templates/new_form/general_info', f: f %>
 			<%= render 'rpg_templates/new_form/classes_info', f: f %>
 			<%= render 'rpg_templates/new_form/levels_info', f: f %>
 			<%= render 'rpg_templates/new_form/stats_info', f: f %>
 			<%= render 'rpg_templates/new_form/skills_info', f: f %>
 			<%= render 'rpg_templates/new_form/feats_info', f: f %>
-			<div class="panel-footer">
+			<div class="panel-footer" style="text-align: right;">
 				<%= f.submit "Create", :class => 'btn btn-success' %>
 			</div>
 		</div>
 	<% end %>
 	<script type="text/javascript">
 		$('#fixed-side-nav').loadTemplate($('#fixed-side-nav-template'), items);
+		$(document.body).scrollspy({
+			target: '#side-nav',
+			offset: 0
+		});
+		!function ($) {
+			$(function(){
+				var $root = $('html, body');
+
+				$('a').click(function() {
+					var href = $.attr(this, 'href');
+					$root.animate({
+						scrollTop: $(href).offset().top + 2
+					}, 500);
+					return false;
+				});
+			})
+		}(window.jQuery);
 	</script>
 </div>
 <%= render 'layouts/back_to_top' %>
