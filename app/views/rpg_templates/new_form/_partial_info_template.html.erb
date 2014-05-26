@@ -2,6 +2,7 @@
 	info_id = "dummy-info" if info_id.to_s.strip.empty?
 	info_title = "Dummy informations" if info_title.to_s.strip.empty?
 	info_collapse_id = "collapseDummy" if info_collapse_id.to_s.strip.empty?
+	expanded = "" if expanded.to_s.strip.empty?
 %>
 
 <script type="text/javascript">
@@ -17,7 +18,7 @@ addNavigationItem({
 		</a>
 	</h4>
 </div>
-<div id="<%= info_collapse_id %>" class="panel-collapse collapse in">
+<div id="<%= info_collapse_id %>" class="panel-collapse collapse <%= expanded %>">
 	<div class="panel-body">
 		<%= yield %>
 	</div>
