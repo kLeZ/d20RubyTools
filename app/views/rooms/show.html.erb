@@ -1,7 +1,7 @@
 <% content_for :title do %> - Room &quot;<%= @room.name %>&quot;<% end %>
 <% content_for :head do %>
-	<%= stylesheet_link_tag "tablecloth", "prettify" %>
-	<%= javascript_include_tag "jquery.metadata", "jquery.tablesorter", "jquery.tablecloth", "jquery.validate.min", "additional-methods.min" %>
+	<%= stylesheet_link_tag "tablecloth", "prettify", 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag "jquery.metadata", "jquery.tablesorter", "jquery.tablecloth", "jquery.validate.min", "additional-methods.min", 'data-turbolinks-track' => true %>
 <% end %>
 <script type="text/javascript">
 	initRoom("<%= room_messages_path(@room) %>", "<%= list_members_room_path(@room) %>", "<%= exit_room_path(@room) %>");

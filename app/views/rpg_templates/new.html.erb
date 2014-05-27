@@ -1,7 +1,7 @@
 <% content_for :title do %> - New RPG Template<% end %>
 <% content_for :head do %>
-	<%= stylesheet_link_tag "tablecloth", "prettify" %>
-	<%= javascript_include_tag "jquery.metadata", "jquery.tablesorter", "jquery.tablecloth" %>
+	<%= stylesheet_link_tag "tablecloth", "prettify", 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag "jquery.metadata", "jquery.tablesorter", "jquery.tablecloth", 'data-turbolinks-track' => true %>
 <% end %>
 
 <script type="text/javascript">

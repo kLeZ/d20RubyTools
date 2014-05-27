@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+* {
+	font-family: 'Open Sans';
+}
+
+body {
+	background-color: #008000;
+}
+
+.shadow-bg {
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+.even td {
+	background: #CCCCCC;
+}
