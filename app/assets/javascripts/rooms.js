@@ -8,6 +8,14 @@ var room_messages_path = '';
 var list_members_room_path = '';
 var exit_room_path = '';
 
+var a, b = false, c = "";
+
+function triggerEvent(el, type) {
+	if ((el[type] || false) && typeof el[type] == 'function') {
+		el[type](el);
+	}
+}
+
 function appendNote() {
 	$('#message_body').val($('#notes').val());
 }
@@ -79,14 +87,32 @@ function initRoom(room_messages, list_members_room, exit_room) {
 		$(this).tab('show')
 	});
 
-	$(window).bind('beforeunload', function() {
-		$.ajax({
-			url : exit_room_path,
-			type : 'PUT',
-			success : function(result) {
-			}
+	$(function() {
+		$('a:not([href^=#])').on('click', function(e) {
+			e.preventDefault();
+			c = this.href;
+			triggerEvent(window, 'onbeforeunload');
 		});
 	});
+
+	window.onbeforeunload = function(e) {
+		if (b) return;
+		a = setTimeout(function() {
+			$.ajax({
+				url : exit_room_path,
+				type : 'PUT',
+				success : function(result) {
+				}
+			});
+			b = true;
+			window.location.href = c;
+			c = "";
+		}, 500);
+	}
+
+	window.onunload = function() {
+		clearTimeout(a);
+	}
 
 	$('#new_message').submit(function() {
 		window.onbeforeunload = null;

@@ -1,15 +1,8 @@
 <% content_for :title do %> - Rooms<% end %>
-<% content_for :head do %>
-	<%= stylesheet_link_tag "tablecloth", "prettify" %>
-	<%= javascript_include_tag "jquery.metadata", "jquery.tablesorter", "jquery.tablecloth" %>
-<% end %>
 
 <h1>Join an existent room</h1>
-<script type="text/javascript">
-	$("table").tablecloth();
-</script>
 <h4>Available rooms</h4>
-<table class="table table-striped table-condensed">
+<table class="table-dark table-striped table-condensed">
 	<% @rooms.each do |room| %>
 	<tr>
 		<td><strong style="font-size: large;"><%= room.name %></strong></td>

@@ -16,3 +16,17 @@
 // Loads all Bootstrap javascripts
 //= require bootstrap
 //= require websocket_rails/main
+
+!function($) {
+	$(function() {
+		var $root = $('html, body');
+
+		$('a[data-spy="smooth"]').click(function() {
+			var href = $.attr(this, 'href');
+			$root.animate({
+				scrollTop : $(href).offset().top + 2
+			}, 500);
+			return false;
+		});
+	})
+}(window.jQuery);

@@ -1,0 +1,10 @@
+#fixed-side-nav li.active {
+	border: 0 #00FF00 solid;
+	border-right-width: 5px;
+}
+
+.panel-heading h4 {
+	margin: 0;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}

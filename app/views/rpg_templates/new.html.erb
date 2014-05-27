@@ -5,15 +5,10 @@
 <% end %>
 
 <script type="text/javascript">
-var items = [];
-function addNavigationItem(item) {
-	items.push(item);
-}
-$.addTemplateFormatter({
-	anchor : function (value, template) {
-		return '#' + value;
+	var items = [];
+	function addNavigationItem(item) {
+		items.push(item);
 	}
-});
 </script>
 <script type="text/html" id="fixed-side-nav-template">
 	<li>
@@ -23,28 +18,13 @@ $.addTemplateFormatter({
 		]' href="" data-spy="smooth"></a>
 	</li>
 </script>
-<style>
-	#fixed-side-nav li.active {
-		border: 0 #ddd solid;
-		border-right-width: 5px;
-	}
 
-	.panel-heading h4 {
-		margin: 0;
-		padding-top: 10px;
-		padding-bottom: 10px;
-	}
-</style>
-
-<div id="side-nav" data-spy="affix">
-	<ul id="fixed-side-nav" class="nav nav-stacked affix">
-	</ul>
-</div>
+<div id="side-nav" data-spy="affix"><ul id="fixed-side-nav" class="nav nav-stacked affix border-form-div" style="width: 250px;"></ul></div>
 
 <div class="border-form-div" style="max-width: 600px;">
 	<h2>New RPG Template</h2>
 	<%= form_for :rpg_template, :url => rpg_templates_path do |f| %>
-		<div id="accordion" class="panel panel-default" data-offset="0">
+		<div id="accordion" class="panel panel-dark" data-offset="0">
 			<%= render 'rpg_templates/new_form/general_info', f: f %>
 			<%= render 'rpg_templates/new_form/classes_info', f: f %>
 			<%= render 'rpg_templates/new_form/levels_info', f: f %>
@@ -57,24 +37,16 @@ $.addTemplateFormatter({
 		</div>
 	<% end %>
 	<script type="text/javascript">
+		$.addTemplateFormatter({
+			anchor : function (value, template) {
+				return '#' + value;
+			}
+		});
+
 		$('#fixed-side-nav').loadTemplate($('#fixed-side-nav-template'), items);
 		$(document.body).scrollspy({
 			target: '#side-nav',
 			offset: 0
 		});
-		!function ($) {
-			$(function(){
-				var $root = $('html, body');
-
-				$('a[data-spy="smooth"]').click(function() {
-					var href = $.attr(this, 'href');
-					$root.animate({
-						scrollTop: $(href).offset().top + 2
-					}, 500);
-					return false;
-				});
-			})
-		}(window.jQuery);
 	</script>
 </div>
-<%= render 'layouts/back_to_top' %>

@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+* {
+	font-family: 'Open Sans';
+}
+
+html, body {
+	background-color: #008000;
+}
+
+a, a:hover, a:active {
+	background-color: transparent;
+	color: #4B9EE5;
+}
+
+.border-form-div {
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+.panel-bright {
+	background-color: rgba(255, 255, 255, 0.1);
+	border: 1px #000 solid;
+}
+
+.panel-dark {
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+.container {
+	color: #fff;
+}
+
+.modal-dialog {
+	background-color: transparent;
+	color: #585858;
+}
+
+#jumbo_header {
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+.shadow-bg {
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+.tab-content {
+	border: 1px solid #eee;
+}
+
+.even td {
+	background: #CCCCCC;
+}
+
+li.active a[data-spy="smooth"] {
+	border: 0;
+	border-right: 5px #00ff00 solid;
+}
