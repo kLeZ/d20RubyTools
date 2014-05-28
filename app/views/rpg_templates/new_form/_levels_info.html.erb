@@ -33,7 +33,7 @@
 		<div class="input-control" style="margin: 3px;">
 			<%= l.label 'Level-up Factor Formula' %>
 			<div class="input-group">
-				<%= l.text_field :levelup_factor_formula, :placeholder => 'current_exp_soil+(current_level*1000)', :class=> 'form-control', :style => 'margin: 0;' %>
+				<%= l.text_field :levelup_factor_formula, :id => 'levelup_factor_formula', :placeholder => 'current_exp_soil+(current_level*1000)', :class=> 'form-control', :style => 'margin: 0;' %>
 				<span class="input-group-addon">
 					<a data-toggle="modal" href="#levels-help"><%= icon 'question-circle' %></a>
 				</span>
@@ -66,13 +66,13 @@
 						</div>
 						<div class="tab-pane fade in" id="vars-pane">
 							<div id="vars" class="list-group">
-								<a class="list-group-item">
+								<a class="list-group-item" href="#levelup_factor_formula">
 									<h4 class="list-group-item-heading">current_level</h4>
 									<p class="list-group-item-text">
 										This is the current level in the cyclic calculation.
 									</p>
 								</a>
-								<a class="list-group-item">
+								<a class="list-group-item" href="#levelup_factor_formula">
 									<h4 class="list-group-item-heading">current_exp_soil</h4>
 									<p class="list-group-item-text">
 										This is the current soil of experience that can let a character gain the next level.
@@ -81,6 +81,12 @@
 							</div>
 							<script>
 								$('#vars > .list-group-item').hover(function() { $(this).toggleClass('active'); });
+								$('#vars > .list-group-item').click(function() {
+									$('#levelup_factor_formula').val(
+										$('#levelup_factor_formula').val() +
+										$(this).children('.list-group-item-heading').text()
+									);
+								});
 							</script>
 						</div>
 					</div>
