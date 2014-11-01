@@ -27,5 +27,9 @@ module D20RubyTools
 		config.generators do |g|
 			g.assets false
 		end
+
+		# Compress JavaScripts and CSS.
+		config.assets.js_compressor = :uglifier
+		config.assets.css_compressor = :sass
 	end
 end
